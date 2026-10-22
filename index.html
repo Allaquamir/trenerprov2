@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AQUAMINSKMIR — кабинет тренера</title>
+<meta name="theme-color" content="#EEE5D6" id="tcol">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>try{document.documentElement.dataset.theme=localStorage.getItem("aqm-theme")||"sand"}catch(e){document.documentElement.dataset.theme="sand"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Rubik:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--head:'Rubik','Trebuchet MS',sans-serif;--body:'Onest',system-ui,-apple-system,'Segoe UI',sans-serif;--shadow:0 8px 24px rgba(var(--sh),.08)}
+:root{--pool:#CFE1EA;--ice:#EAE2D3;--milk:#FCF9F3;--sun:#9FC5D9;--strong:#2F4B5C;--ink:#3E5463;--ink2:#66767F;--line:#E4DACA;--panel:#3E6074;--on-panel:#FCF9F3;--on-panel2:#D6E4EB;--on-accent:#24404F;--star:#D9A441;--star-off:#E6DDCB;--page1:#EEE5D6;--page2:#F8F3EA;--blob1:rgba(159,197,217,.45);--blob2:rgba(226,201,160,.45);--sh:47,75,92;--a0:#9FC5D9;--a1:#E9DFCC;--a2:#D9BE91;--wave:#B5D2E0;color-scheme:light}
+[data-theme=fog]{--pool:#C4D3DD;--ice:#E1E7EB;--milk:#FAFBFC;--sun:#A3BBCB;--strong:#2E4252;--ink:#3D5060;--ink2:#66788A;--line:#DCE3E8;--panel:#3C5568;--on-panel:#FAFBFC;--on-panel2:#D3DEE6;--on-accent:#213445;--star:#D2A24C;--star-off:#DCE3E8;--page1:#E4EAEE;--page2:#F5F7F8;--blob1:rgba(163,187,203,.45);--blob2:rgba(214,201,176,.35);--sh:46,66,82;--a0:#A3BBCB;--a1:#E1E7EB;--a2:#D6C9B0;--wave:#BFD0DB;color-scheme:light}
+[data-theme=lagoon]{--pool:#BBD8CF;--ice:#DDE9E3;--milk:#FAFCFA;--sun:#8FC1B5;--strong:#274A45;--ink:#36554F;--ink2:#5F7D77;--line:#D5E4DD;--panel:#38625B;--on-panel:#FAFCFA;--on-panel2:#CFE4DC;--on-accent:#1B3A35;--star:#D4A24A;--star-off:#D9E6DF;--page1:#E4EEE9;--page2:#F6F9F6;--blob1:rgba(143,193,181,.45);--blob2:rgba(232,216,184,.4);--sh:39,74,69;--a0:#8FC1B5;--a1:#DDE9E3;--a2:#E0CFA6;--wave:#B4D6CD;color-scheme:light}
+[data-theme=lavender]{--pool:#D5CCE5;--ice:#E7E1ED;--milk:#FCFAFD;--sun:#B7A9D6;--strong:#403658;--ink:#4F4568;--ink2:#766C8D;--line:#E2DCEA;--panel:#52476E;--on-panel:#FCFAFD;--on-panel2:#DDD5EA;--on-accent:#2E2545;--star:#D8A84E;--star-off:#E4DEEC;--page1:#EDE8F2;--page2:#F9F7FB;--blob1:rgba(183,169,214,.4);--blob2:rgba(235,222,205,.45);--sh:64,54,88;--a0:#B7A9D6;--a1:#E7E1ED;--a2:#E2CDB0;--wave:#CFC6E2;color-scheme:light}
+[data-theme=rose]{--pool:#EDCFD2;--ice:#F0DFDC;--milk:#FEFAF8;--sun:#DFA9B3;--strong:#6A3A46;--ink:#6F4752;--ink2:#8F6670;--line:#EBD8D6;--panel:#85505D;--on-panel:#FEFAF8;--on-panel2:#F3D9DD;--on-accent:#4F2530;--star:#D4687F;--star-off:#F0DFDC;--page1:#F4E8E6;--page2:#FBF4F2;--blob1:rgba(223,169,179,.4);--blob2:rgba(240,215,205,.5);--sh:106,58,70;--a0:#E8C4C8;--a1:#F3E1DF;--a2:#DFA9B3;--wave:#EBC9CD;color-scheme:light}
+[data-theme=mint]{--pool:#C7DDCB;--ice:#E2EAD8;--milk:#FCFDF8;--sun:#9CC7A8;--strong:#2F4A37;--ink:#3F5A47;--ink2:#66806D;--line:#DDE7D4;--panel:#416450;--on-panel:#FCFDF8;--on-panel2:#D5E6D9;--on-accent:#20382A;--star:#D4A24A;--star-off:#E0E8D6;--page1:#ECF1E4;--page2:#F7F9F1;--blob1:rgba(156,199,168,.4);--blob2:rgba(235,225,190,.4);--sh:47,74,55;--a0:#9CC7A8;--a1:#E2EAD8;--a2:#E0D2A4;--wave:#C7DDCB;color-scheme:light}
+[data-theme=sunset]{--pool:#F0D3BE;--ice:#F0E0D2;--milk:#FFFAF5;--sun:#E3A98B;--strong:#6B3F2E;--ink:#6F4A3B;--ink2:#8F6D5C;--line:#EBDACB;--panel:#85523D;--on-panel:#FFFAF5;--on-panel2:#F5DDCB;--on-accent:#4A2418;--star:#D4903F;--star-off:#EFDFD1;--page1:#F3E6DB;--page2:#FAF3EC;--blob1:rgba(227,169,139,.4);--blob2:rgba(240,211,190,.5);--sh:107,63,46;--a0:#EBC9B1;--a1:#F0E0D2;--a2:#E3A98B;--wave:#EFCFB8;color-scheme:light}
+[data-theme=ocean]{--pool:#B7D1E3;--ice:#D2E1EC;--milk:#FAFCFD;--sun:#6FA3C7;--strong:#1F3C55;--ink:#2D4A63;--ink2:#587590;--line:#CFDFEA;--panel:#2C587A;--on-panel:#FAFCFD;--on-panel2:#CFE0EC;--on-accent:#0F2A40;--star:#D9A441;--star-off:#D6E3EC;--page1:#D9E7F0;--page2:#F1F6FA;--blob1:rgba(111,163,199,.4);--blob2:rgba(222,208,180,.4);--sh:31,60,85;--a0:#86B1CF;--a1:#D2E1EC;--a2:#DCCFA8;--wave:#9DC1DA;color-scheme:light}
+[data-theme=night]{--pool:#4A7595;--ice:#26405C;--milk:#1D3048;--sun:#86B2D1;--strong:#E6EEF5;--ink:#CBD8E4;--ink2:#93A8BC;--line:#2B4560;--panel:#2F5578;--on-panel:#F1F6FA;--on-panel2:#BBD0E1;--on-accent:#0F2233;--star:#E3BC6A;--star-off:#2F4A66;--page1:#17263A;--page2:#101B2B;--blob1:rgba(91,135,168,.25);--blob2:rgba(227,188,106,.10);--sh:0,0,0;--a0:#5B87A8;--a1:#86B2D1;--a2:#E3BC6A;--wave:#25476A;color-scheme:dark}
+[data-theme=graphite]{--pool:#7D8F9C;--ice:#3A3F44;--milk:#2E3236;--sun:#C9B58C;--strong:#EEE9DF;--ink:#D8D4CB;--ink2:#A29E95;--line:#3F4449;--panel:#4A5158;--on-panel:#F4F1EA;--on-panel2:#CFCAC0;--on-accent:#26231C;--star:#D8B56A;--star-off:#474C52;--page1:#26292C;--page2:#1B1D20;--blob1:rgba(125,143,156,.22);--blob2:rgba(201,181,140,.10);--sh:0,0,0;--a0:#7D8F9C;--a1:#9AA7B1;--a2:#C9B58C;--wave:#3C454D;color-scheme:dark}
+
+
+*{box-sizing:border-box;margin:0}
+html{background:radial-gradient(circle at 12% 18%,rgba(145,213,226,.6) 0 130px,transparent 131px),radial-gradient(circle at 90% 62%,rgba(255,216,107,.5) 0 170px,transparent 171px),var(--ice);background-attachment:fixed}
+body{font-family:var(--body);color:var(--ink);max-width:480px;margin:0 auto;min-height:100vh;padding:0 16px 190px;line-height:1.45;background:linear-gradient(180deg,var(--page1),var(--page2) 440px) no-repeat,var(--page2)}
+@media(min-width:720px){body{margin:28px auto;min-height:calc(100vh - 56px);border-radius:36px;box-shadow:0 30px 80px rgba(var(--sh),.2)}nav{bottom:44px!important}.savebar{bottom:128px!important}}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+:focus-visible{outline:3px solid var(--deep);outline-offset:2px}
+h2{font-family:var(--head);font-weight:600;font-size:18px;color:var(--strong);margin:22px 4px 12px}
+.muted{color:var(--ink2);font-size:14px}
+.card{background:var(--milk);border-radius:24px;padding:16px;box-shadow:var(--shadow);margin-top:10px}
+.num{font-family:var(--head);font-variant-numeric:tabular-nums}
+.top{display:flex;align-items:center;gap:12px;padding:max(18px,env(safe-area-inset-top)) 4px 14px}
+.ava{width:48px;height:48px;border-radius:50%;background:var(--sun);display:grid;place-items:center;font-family:var(--head);font-weight:600;color:var(--on-accent);flex:none}
+.top h1{font-family:var(--head);font-weight:600;font-size:22px;color:var(--strong);line-height:1.15}
+.lock{margin-left:auto;background:var(--panel);color:var(--on-panel);border-radius:99px;padding:5px 11px;font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.lock svg{width:13px;height:13px;stroke:var(--sun);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+section{display:none}section.on{display:block}
+.in{width:100%;border:2px solid var(--ice);border-radius:16px;padding:11px 14px;background:var(--milk);font-size:15px;margin-top:8px}
+.in::placeholder{color:var(--ink2)}
+textarea.in{resize:vertical;font-size:14px}
+.in.sm{padding:6px 10px;margin-top:6px;font-size:14px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chips{display:flex;gap:8px;overflow-x:auto;margin:10px -16px 0;padding:0 16px 4px}
+.chips button{flex:none;padding:8px 15px;border-radius:99px;background:var(--milk);font-size:13px;font-weight:600;color:var(--ink2)}
+.chips button[aria-pressed=true]{background:var(--panel);color:var(--on-panel)}
+.seg2{display:flex;background:var(--ice);border-radius:99px;padding:4px;margin:6px 0 4px}
+.seg2 button{flex:1;padding:9px;border-radius:99px;font-weight:600;font-size:14px;color:var(--ink2)}
+.seg2 button[aria-pressed=true]{background:var(--milk);color:var(--strong);box-shadow:0 2px 8px rgba(var(--sh),.12)}
+.bar2{display:flex;justify-content:space-between;align-items:center;margin:14px 4px 0}
+.btn{display:block;width:100%;margin-top:12px;padding:14px;border-radius:18px;background:var(--sun);color:var(--on-accent);font-weight:600;text-align:center}
+.btn.s{width:auto;margin:0;padding:9px 16px;font-size:14px;border-radius:99px}
+.btn.g{background:var(--ice)}
+.btn:disabled{background:var(--ice);color:var(--ink2)}
+.tag{font-size:11px;font-weight:600;background:var(--sun);border-radius:6px;padding:1px 7px;color:var(--on-accent);display:inline-block}
+.tag.n{background:var(--ice)}
+.av2{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--head);font-weight:600;color:var(--on-accent);flex:none}
+.av2.big{width:60px;height:60px;font-size:20px}
+.sp{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:12px 14px;margin-top:8px;border-radius:20px;cursor:pointer}
+.sp b{font-weight:600;display:block}
+.sp .r{text-align:right}.sp .r b{font-family:var(--head);font-size:18px;color:var(--strong)}.sp small{font-size:11px;color:var(--ink2)}
+.rk{display:grid;grid-template-columns:34px 44px 1fr auto;gap:10px;align-items:center;padding:10px 14px;margin-top:8px;border-radius:20px;cursor:pointer}
+.pos{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-family:var(--head);font-weight:600;background:var(--ice);color:var(--strong)}
+.pos.p1{background:var(--sun)}.pos.p2{background:var(--pool)}
+.rk .t{font-family:var(--head);font-weight:600;font-size:18px;color:var(--strong)}
+.session{margin-top:14px;display:flex;align-items:center;gap:14px;background:var(--panel);color:var(--on-panel);border-radius:24px;padding:16px 18px}
+.session b{font-family:var(--head);font-size:34px;color:var(--sun);line-height:1}
+.session span{font-size:14px;color:var(--on-panel2);line-height:1.3}.session strong{display:block;color:var(--on-panel);font-size:16px}
+.tblw{overflow-x:auto;padding:8px 10px}
+.tblw table{border-collapse:collapse;font-size:13px;white-space:nowrap}
+.tblw th{font-weight:500;color:var(--ink2);padding:8px;text-align:right}
+.tblw td{padding:8px;text-align:right;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
+.tblw th:first-child,.tblw td:first-child{text-align:left;position:sticky;left:0;background:var(--milk);font-weight:600}
+.tblw td.b{background:var(--sun);font-weight:600;border-radius:8px;color:var(--on-accent)}
+/* тренировка */
+.sw .h{display:flex;align-items:center;gap:10px}.sw .h b{font-weight:600;flex:1}
+.st{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+.st button{padding:9px 0;border-radius:14px;background:var(--ice);font-weight:600;font-size:14px;color:var(--ink2)}
+.st button[aria-pressed=true].p{background:var(--pool);color:var(--on-accent)}
+.st button[aria-pressed=true].a{background:var(--sun);color:var(--on-accent)}
+.st button[aria-pressed=true].s{background:var(--milk);color:var(--strong);outline:2px dashed var(--pool);outline-offset:-2px}
+.rt{display:flex;align-items:center;gap:2px;margin-top:10px}.rt .muted{margin-right:auto;font-size:13px}
+.rt button{padding:2px}.rt svg{width:28px;height:28px;fill:var(--star-off)}.rt .on svg{fill:var(--star)}
+.savebar{position:fixed;bottom:92px;left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:456px;background:var(--panel);color:var(--on-panel);border-radius:22px;display:flex;align-items:center;gap:8px;padding:10px 10px 10px 18px;box-shadow:0 10px 30px rgba(var(--sh),.25);z-index:5}
+.savebar span{flex:1;font-size:14px;line-height:1.25}
+.savebar button{padding:10px 14px;border-radius:14px;font-weight:600;font-size:14px}
+.savebar .g{background:rgba(255,255,255,.14);color:var(--on-panel)}.savebar .y{background:var(--sun);color:var(--on-accent)}.savebar.off{display:none}
+/* аналитика */
+.sum{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.sum .card{margin:0;padding:14px 12px}.sum b{font-family:var(--head);font-size:26px;color:var(--strong);display:block;line-height:1.1}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;margin-top:10px}
+.nums.n4{grid-template-columns:repeat(4,1fr)}
+.nums div{background:var(--ice);border-radius:14px;padding:7px 0}.nums b{display:block;font-family:var(--head);font-size:17px;color:var(--strong)}.nums small{font-size:11px;color:var(--ink2)}
+.bar{height:9px;background:var(--ice);border-radius:99px;margin:10px 0 0;overflow:hidden}.bar i{display:block;height:100%;background:var(--pool);border-radius:99px}.bar i.low{background:var(--sun)}
+.gs{cursor:pointer}.gs .h{display:flex;align-items:center;gap:10px}.gs .h b{flex:1;font-weight:600}.gs .pct{font-family:var(--head);font-weight:600;font-size:20px;color:var(--strong)}
+/* профиль */
+.sheet{position:fixed;inset:0;background:rgba(var(--sh),.45);z-index:20;display:flex;align-items:flex-end;justify-content:center}
+.sheet[hidden]{display:none}
+.shin{background:var(--milk);width:100%;max-width:480px;max-height:94vh;overflow-y:auto;border-radius:30px 30px 0 0;padding:20px 16px 40px;background:linear-gradient(180deg,var(--page1),var(--page2) 220px)}
+.ph{display:flex;gap:12px;align-items:center}.ph h2{margin:0}.ph .x{margin-left:auto;width:38px;height:38px;border-radius:50%;background:var(--milk);font-size:22px;line-height:1;align-self:flex-start;box-shadow:var(--shadow)}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 0}
+.kv{display:grid;grid-template-columns:110px 1fr;gap:6px 10px;font-size:14px}.kv span:nth-child(odd){color:var(--ink2)}.kv a{color:var(--strong);font-weight:600}
+.brow{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:10px 8px;border-radius:14px;cursor:pointer}
+.brow.sel{background:var(--ice)}.brow b{font-family:var(--head);font-weight:600;color:var(--strong)}.brow small{font-size:12px;color:var(--ink2)}
+.hist{display:grid;grid-template-columns:1fr auto auto;gap:2px 10px;align-items:center;padding:10px 0;border-top:1px solid var(--line);font-size:14px}
+.hist small{color:var(--ink2);font-size:12px}.hist .x2{font-size:18px;color:var(--ink2);padding:0 4px;grid-row:1/3;grid-column:3}
+.spark svg{display:block;width:100%;height:auto}.spark small{display:flex;justify-content:space-between;font-size:12px;color:var(--ink2)}
+.rdl{margin-top:8px;font-size:13px}
+.drop{display:block;text-align:center;border:3px dashed var(--pool);border-radius:20px;padding:14px;margin-top:10px;cursor:pointer;font-weight:600;color:var(--strong);font-size:14px}
+.drop input{display:none}
+.pr{display:grid;grid-template-columns:26px 1fr auto;gap:10px;align-items:center;padding:12px 14px;margin-top:8px;border-radius:20px}
+.pr input{width:20px;height:20px;accent-color:var(--strong)}.pr small{display:block;font-size:12px;color:var(--ink2)}.pr .t{font-family:var(--head);font-weight:600;font-size:17px;color:var(--strong);text-align:right}
+.pr .rt2{text-align:right}
+.note{font-size:13px;color:var(--ink2);margin:12px 4px 0}
+.note.in{margin-top:10px}
+nav{position:fixed;bottom:max(12px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:calc(100% - 24px);max-width:456px;background:var(--milk);border-radius:28px;display:flex;padding:6px;box-shadow:0 10px 30px rgba(var(--sh),.18);z-index:6}
+nav button{flex:1;padding:8px 2px 6px;border-radius:22px;font-size:11px;color:var(--ink2);display:flex;flex-direction:column;align-items:center;gap:2px}
+nav svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+nav button[aria-selected=true]{background:var(--sun);color:var(--on-accent);font-weight:600}
+.toast{position:fixed;top:16px;left:50%;transform:translate(-50%,-90px);background:var(--panel);color:var(--on-panel);padding:12px 20px;border-radius:99px;font-size:14px;font-weight:600;transition:transform .3s;z-index:30;max-width:90%;text-align:center}
+.toast.show{transform:translate(-50%,0)}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+
+html{background:radial-gradient(circle at 12% 18%,var(--blob1) 0 130px,transparent 131px),radial-gradient(circle at 90% 62%,var(--blob2) 0 170px,transparent 171px),radial-gradient(circle at 6% 86%,var(--blob2) 0 90px,transparent 91px),radial-gradient(circle at 96% 14%,var(--blob1) 0 70px,transparent 71px),var(--page1);background-attachment:fixed}
+body{padding-bottom:0;display:flex;flex-direction:column;position:relative;overflow-x:hidden;transition:background-color .2s}
+main{flex:1;position:relative;z-index:1}
+.top{position:relative;z-index:1}
+@media(min-width:720px){body{overflow:hidden}}
+option{background:var(--milk);color:var(--ink)}
+.btn.g,.btn.s.g{color:var(--strong)}
+.btn:disabled{color:var(--ink2)}
+.tag.n{color:var(--strong)}
+.pos.p1,.pos.p2{color:var(--on-accent)}
+.card.acc{background:var(--sun)}.card.acc,.card.acc *{color:var(--on-accent)!important}
+.lock span{white-space:nowrap}
+@media(max-width:430px){.lock span{display:none}.lock{padding:8px}.top h1{font-size:20px}}
+.tbtn{width:38px;height:38px;border-radius:50%;background:var(--milk);box-shadow:var(--shadow);display:grid;place-items:center;flex:none}
+.tbtn svg{width:20px;height:20px;stroke:var(--strong);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tbtn svg .f{fill:var(--strong)}
+.deco-top{position:absolute;top:0;left:0;width:100%;height:96px;color:var(--wave);transform:scaleY(-1);opacity:.65;pointer-events:none;z-index:0}
+.foot{margin:34px -16px 0;position:relative;color:var(--wave)}
+.foot .fw{display:block;width:100%;height:80px}
+.foot .fb{background:var(--wave);height:150px;margin-top:-1px;position:relative;overflow:hidden}
+.foot .fb svg{position:absolute;color:var(--milk);opacity:.75}
+.foot .f1{width:72px;left:12%;top:24px}.foot .f2{width:46px;left:60%;top:70px;opacity:.5}.foot .f3{width:60px;right:7%;top:14px;transform:scaleX(-1)}
+.foot .b1{width:34px;left:38%;top:12px}.foot .b2{width:26px;right:26%;top:62px}
+.empty{text-align:center;padding:26px 16px;color:var(--ink2);position:relative;margin-top:10px}
+.empty svg{color:var(--pool)}.empty .e1{width:92px;display:block;margin:0 auto 8px}
+.empty .e2{position:absolute;width:26px;left:calc(50% + 40px);top:6px}
+.empty p{max-width:270px;margin:0 auto;font-size:14px}
+.session{position:relative;overflow:hidden}
+.session::before,.session::after{content:"";position:absolute;border-radius:50%;border:2px solid var(--on-panel);opacity:.12;right:-30px;top:-50px;width:150px;height:150px}
+.session::after{width:96px;height:96px;right:6px;top:-18px}
+.session>*{position:relative}
+.shin{position:relative}.shin>*{position:relative}
+.dsh{position:absolute!important;top:0;left:0;width:100%;height:84px;color:var(--wave);transform:scaleY(-1);opacity:.6;pointer-events:none}
+.frow{display:grid;grid-template-columns:42px 1fr auto auto;gap:10px;align-items:center;padding:10px 12px;margin-top:8px;border-radius:20px}
+.ck{width:40px;height:40px;border-radius:50%;border:2.5px solid var(--pool);background:var(--milk);display:grid;place-items:center}
+.ck svg{width:22px;height:22px;stroke:var(--on-accent);fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+.ck[aria-checked=true]{background:var(--sun);border-color:var(--sun)}.ck[aria-checked=true] svg{opacity:1}
+.amt{display:flex;align-items:center;gap:4px;font-size:13px;color:var(--ink2)}
+.amt .in{width:78px;margin:0;padding:8px 10px;text-align:right}
+.frow .x2{font-size:20px;color:var(--ink2);padding:4px 6px}
+.chk{display:flex;gap:10px;align-items:center;font-size:13px;color:var(--ink2);margin-top:12px}.chk input{width:18px;height:18px;accent-color:var(--strong)}
+.set{display:grid;grid-template-columns:66px 1fr;gap:2px 10px;padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+.set b{font-family:var(--head);color:var(--strong)}.set small{grid-column:2;color:var(--ink2);font-size:12px}
+.sec{font-family:var(--head);font-weight:600;color:var(--strong);margin-top:14px;display:flex;justify-content:space-between}
+.sec span{font-weight:500;color:var(--ink2);font-size:13px}
+.th{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.th button{border-radius:20px;padding:10px 8px;background:var(--milk);box-shadow:var(--shadow);text-align:center;font-size:13px;font-weight:600;color:var(--ink);border:3px solid transparent}
+.th button[aria-pressed=true]{border-color:var(--sun)}
+.th i{display:block;height:50px;border-radius:14px;margin-bottom:8px}
+.th .t-aqua i{background:linear-gradient(135deg,#D9F1F4 40%,#91D5E2 40% 70%,#FFD86B 70%)}
+.th .t-night i{background:linear-gradient(135deg,#0A1C25 40%,#4FA3B8 40% 70%,#F5CB62 70%)}
+.th .t-pink i{background:linear-gradient(135deg,#FDE6EF 40%,#F9C9DC 40% 70%,#F59BBE 70%)}
+
+.brow .rp{grid-column:1/-1}
+.rp .bar{margin:6px 0 4px;height:7px}.rp small{font-size:12px;color:var(--ink2)}
+.near{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-top:1px solid rgba(0,0,0,.08);font-size:14px}.near:first-of-type{border-top:0}
+.md{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;font-weight:700;font-size:12px;color:#3A2A10;flex:none}
+.md.big{width:46px;height:46px;font-size:20px}
+.medals{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.mt{background:var(--milk);border-radius:22px;padding:14px 8px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;gap:4px}
+.mt b{font-family:var(--head);font-size:26px;color:var(--strong);line-height:1}.mt small{color:var(--ink2);font-size:12px}
+.hofrow{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;padding:12px 14px;margin-top:8px;border-radius:20px;cursor:pointer}
+.mrow{display:flex;gap:10px}.mc{display:flex;align-items:center;gap:4px;font-family:var(--head);font-weight:600;color:var(--strong)}
+.pr2{display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:start;padding:12px;margin-top:8px;border-radius:20px}
+.pr2.on{outline:2px solid var(--sun)}
+.pr2 .two2{display:grid;grid-template-columns:1fr 84px;gap:6px}
+.pr2 .tm{width:98px;text-align:right;font-family:var(--head);font-weight:600;margin:0}
+.pr2 small{display:block;margin:6px 0 4px}
+.alts{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;margin-top:6px}
+.alts button{padding:3px 8px;border-radius:99px;background:var(--ice);font-size:11px;color:var(--strong)}.alts button[aria-pressed=true]{background:var(--sun);color:var(--on-accent)}
+.diff{display:flex;gap:8px;margin-top:6px}.diff button{flex:1;padding:10px 0;border-radius:14px;background:var(--ice);font-family:var(--head);font-weight:600;color:var(--ink2)}.diff button[aria-pressed=true]{background:var(--sun);color:var(--on-accent)}
+textarea.in{margin-top:12px}
+.setc .h{display:grid;gap:6px}.setc .row3{display:grid;grid-template-columns:1fr 74px;gap:6px}.setc .h .in{margin-top:0}
+.sw2{display:grid;grid-template-columns:36px 1fr auto;gap:8px;align-items:center;padding:6px 0;border-top:1px solid var(--line);font-size:14px}
+.sw2 .ck{width:32px;height:32px}.sw2 .ck svg{width:18px;height:18px}
+.sw2 .tin{width:92px;margin:0;text-align:right}
+.dl{font-size:11px;font-weight:600;padding:0 6px;border-radius:6px}.dl.up{background:var(--sun);color:var(--on-accent)}.dl.dn{background:var(--ice);color:var(--ink2)}.dl:empty{display:none}
+.mnav{display:flex;align-items:center;justify-content:space-between;margin:0 0 6px}
+.mnav button{width:40px;height:40px;border-radius:50%;background:var(--milk);box-shadow:var(--shadow);font-size:22px;line-height:1;color:var(--strong)}
+.mnav b{font-family:var(--head);color:var(--strong);font-size:18px}
+.jr table{font-size:13px}.jr th,.jr td{text-align:center;padding:7px 6px;white-space:nowrap}
+.jr td:first-child,.jr th:first-child{text-align:left;position:sticky;left:0;background:var(--milk);font-weight:600;z-index:1}
+.jr .dh{font-family:var(--head);font-weight:600;color:var(--strong);line-height:1.1}.jr .dh small{display:block;font-weight:400;color:var(--ink2);font-size:10px}
+.jr .jp,.legend2 .jp{color:var(--strong);font-weight:700}
+.jr .ja,.legend2 .ja{background:var(--sun);color:var(--on-accent);font-weight:700;border-radius:8px;padding:0 6px}
+.jr .js,.legend2 .js{outline:2px dashed var(--pool);outline-offset:-3px;border-radius:8px;font-weight:700;color:var(--strong)}
+.jr tfoot td{border-top:2px solid var(--line);color:var(--ink2);font-size:12px}
+.legend2{display:flex;gap:16px;font-size:13px;color:var(--ink2);margin:10px 4px}
+.cal7{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.cal7 .w{text-align:center;font-size:11px;color:var(--ink2)}
+.cd{aspect-ratio:1;border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;color:var(--ink2);border:2px solid transparent;font-family:var(--body)}
+.cd b{font-weight:600}.cd small{font-size:10px}
+.cd.has{background:var(--ice);color:var(--strong);cursor:pointer}
+.cd.d1{background:color-mix(in srgb,var(--sun) 22%,var(--milk))}.cd.d2{background:color-mix(in srgb,var(--sun) 38%,var(--milk))}.cd.d3{background:color-mix(in srgb,var(--sun) 56%,var(--milk))}.cd.d4{background:color-mix(in srgb,var(--sun) 74%,var(--milk))}.cd.d5{background:var(--sun);color:var(--on-accent)}
+.cd.today{border-color:var(--strong)}
+.chart svg{width:100%;height:auto;display:block}
+.cb{fill:var(--pool)}.cl{fill:none;stroke:var(--strong);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}.ca{fill:var(--pool);opacity:.35}
+.cdot{fill:var(--sun);stroke:var(--strong);stroke-width:2}.ct{font-size:9px;fill:var(--ink2)}.cv{font-size:9px;fill:var(--strong);font-weight:600}.cax{stroke:var(--line);stroke-width:1}
+.stars2{color:var(--star);font-size:12px}
+.thg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}
+.thg button{border-radius:20px;padding:10px 8px;background:var(--milk);box-shadow:var(--shadow);text-align:center;font-size:13px;font-weight:600;color:var(--ink);border:3px solid transparent}
+.thg button[aria-pressed=true]{border-color:var(--sun)}
+.thg i{display:block;height:46px;border-radius:14px;margin-bottom:8px;border:1px solid rgba(0,0,0,.06)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><symbol id="star" viewBox="0 0 24 24"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 16.9 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z"/></symbol>
+<symbol id="art-wave" viewBox="0 0 480 80" preserveAspectRatio="none"><path fill="currentColor" fill-opacity=".35" d="M0 34Q30 14 60 34T120 34T180 34T240 34T300 34T360 34T420 34T480 34V80H0Z"/><path fill="currentColor" fill-opacity=".5" d="M0 48Q40 30 80 48T160 48T240 48T320 48T400 48T480 48V80H0Z"/><path fill="currentColor" d="M0 62Q30 52 60 62T120 62T180 62T240 62T300 62T360 62T420 62T480 62V80H0Z"/></symbol>
+<symbol id="art-fish" viewBox="0 0 64 32"><path d="M4 16C12 6 26 4 36 12l12-8v24l-12-8C26 28 12 26 4 16z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><circle cx="14" cy="14" r="1.6" fill="currentColor"/><path d="M24 10q4 6 0 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+<symbol id="art-bub" viewBox="0 0 60 80"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="16" cy="62" r="9"/><circle cx="38" cy="42" r="6"/><circle cx="20" cy="22" r="4.5"/><circle cx="44" cy="10" r="3"/></g></symbol></svg>
+
+<svg class="deco-top" viewBox="0 0 480 80" preserveAspectRatio="none" aria-hidden="true"><use href="#art-wave"/></svg>
+<div class="top">
+  <div class="ava">Т</div>
+  <div data-a="coach" role="button" tabindex="0" style="cursor:pointer"><h1>Кабинет тренера</h1><span class="muted" id="cnt"></span></div>
+  <div class="lock"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Только вы</span></div>
+  <button class="tbtn" data-a="themeNext" aria-label="Сменить оформление"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path class="f" d="M12 3a9 9 0 0 0 0 18z"/></svg></button>
+</div>
+
+<main>
+<section id="sp" class="on">
+  <input class="in" type="search" id="q" placeholder="Поиск: фамилия, адрес, телефон, год…" aria-label="Поиск спортсмена" style="margin-top:0">
+  <div class="chips" id="fSex"></div><div class="chips" id="fGrp" style="margin-top:4px"></div><div class="chips" id="fSort" style="margin-top:4px"></div>
+  <div class="bar2"><span class="muted" id="spCount"></span><button class="btn s" data-a="newSw">+ Спортсмен</button></div>
+  <div id="spList"></div>
+</section>
+
+<section id="rc">
+  <div class="seg2" id="rcSeg" style="margin-top:0"></div>
+  <div id="rcMain">
+  <div class="chips" id="rPool" style="margin-top:8px"></div>
+  <div class="chips" id="rSex" style="margin-top:4px"></div>
+  <div class="chips" id="rYear" style="margin-top:4px"></div>
+  <div class="chips" id="sChips" style="margin-top:4px"></div>
+  <div class="chips" id="dChips" style="margin-top:4px"></div>
+  <div class="session" id="lead"></div>
+  <div id="rank"></div>
+  <h2>Сводная таблица</h2>
+  <div class="card tblw" id="tbl" style="margin-top:0"></div>
+  <p class="note">Выделен лучший результат на дистанции среди выбранных спортсменов. Нажми на спортсмена в рейтинге, чтобы открыть профиль.</p>
+  </div>
+  <div id="rcStat"></div>
+</section>
+
+<section id="tr">
+  <div class="seg2" id="trSeg" style="margin-top:0"></div>
+  <div id="trMain">
+  <div class="chips" id="dates" style="margin-top:8px"></div>
+  <div class="two" style="margin-top:8px"><input class="in" type="date" id="nd" aria-label="Другая дата" style="margin-top:0"><span class="muted" style="align-self:center">другая дата</span></div>
+  <div class="chips" id="tGrp" style="margin-top:6px"></div>
+  <div class="session"><b id="sCnt">0/0</b><span><strong id="sTitle"></strong>Отметь посещаемость и поставь оценку за тренировку.</span></div>
+  <div id="list"></div>
+  <div id="dayLog"></div>
+  </div>
+  <div id="trAtt"></div>
+</section>
+
+
+<section id="sb">
+  <div class="bar2" style="margin:0 4px"><h2 style="margin:0">Сборы</h2><button class="btn s" data-a="fundNew">+ Новый сбор</button></div>
+  <div id="fundList"></div>
+</section>
+
+<section id="pl">
+  <div class="chips" id="plLv" style="margin-top:0"></div>
+  <div class="chips" id="plF" style="margin-top:4px"></div>
+  <div id="plList"></div>
+  <p class="note">Составлено по мотивам открытых материалов USA Swimming (пример тренировки для 12–14 лет с акцентом на скорость и эффективность гребка) и Типовой программы спортивной подготовки ВФП. Сами программы мои, это не копии. Подбирай нагрузку под группу и длину бассейна.</p>
+</section>
+
+<section id="dt">
+  <div class="seg2" id="dtSeg"></div>
+  <div id="dt-pr">
+    <div class="card"><b>Протокол соревнований</b>
+      <p class="muted" style="margin-top:4px">Загрузи файл TXT, Word (.docx) или PDF. Приложение само найдёт в нём спортсменов из твоей базы и покажет только их. Текст можно и вставить.</p>
+      <label class="drop">Выбрать файл протокола (TXT / DOCX / PDF)<input type="file" id="prFile" accept=".txt,.csv,.docx,.pdf"></label>
+      <textarea class="in" id="prTxt" rows="5" placeholder="…или вставь текст протокола сюда"></textarea>
+      <div class="two"><input class="in" type="date" id="prDate" aria-label="Дата, если её нет в протоколе"><input class="in" id="prComp" placeholder="Соревнование, если не указано"></div>
+      <select class="in" id="prPool" aria-label="Бассейн"><option value="">Бассейн: определить автоматически</option><option value="25">Бассейн 25 м</option><option value="50">Бассейн 50 м</option></select>
+      <button class="btn" data-a="parse">Найти моих спортсменов</button>
+    </div>
+    <div id="prOut"></div>
+    <p class="note">Подходит и строчный формат: Фамилия Имя; дистанция; время; место; дата; соревнование; бассейн. Сначала спортсмены должны быть в базе (Ещё → Люди).</p>
+  </div>
+  <div id="dt-sw" style="display:none">
+    <div class="card"><b>Файл Word с группами</b>
+      <p class="muted" style="margin-top:4px">1. Скачай файл. 2. Впиши спортсменов в таблицы «Группа 1», «Группа 2», «Группа 3» (кого-то можно добавить строками). 3. Загрузи файл обратно: список в приложении обновится по нему.</p>
+      <button class="btn" data-a="docTpl">Скачать пустой шаблон Word</button>
+      <button class="btn g" data-a="docOut">Скачать Word с текущими данными</button>
+      <label class="drop">Загрузить заполненный Word (.docx)<input type="file" id="docFile" accept=".docx"></label>
+      <label class="chk"><input type="checkbox" id="docSync"> Заменить список: удалить тех, кого нет в файле</label>
+    </div>
+    <div class="card"><b>Или таблица CSV</b>
+      <p class="muted" style="margin-top:4px">Колонки: ФИО; дата рождения; пол; группа; разряд; адрес; телефон; родитель; телефон родителя; заметка. Из Excel сохрани как «CSV UTF-8». Кто уже есть в списке, будет обновлён.</p>
+      <textarea class="in" id="swTxt" rows="5" placeholder="Иванова Анна; 14.05.2012; Ж; Группа 2; III юношеский; г. Минск, ул. Примерная, 1; +375 29 000-00-00; Иванова Ольга; +375 29 000-00-01"></textarea>
+      <label class="drop">Или выбрать файл CSV<input type="file" id="swFile" accept=".csv,.txt"></label>
+      <button class="btn" data-a="impSw">Добавить / обновить</button>
+      <button class="btn g" data-a="tpl">Скачать шаблон</button>
+    </div>
+  </div>
+  <div id="dt-bk" style="display:none">
+    <div class="card"><b>Резервная копия</b>
+      <p class="muted" style="margin-top:4px">Все данные хранятся только в этом браузере на этом устройстве. Скачивай копию регулярно: при очистке браузера данные пропадут.</p>
+      <button class="btn" data-a="expJ">Скачать копию (JSON)</button>
+      <label class="drop">Восстановить из копии<input type="file" id="bkFile" accept=".json"></label>
+      <button class="btn g" data-a="expSw">Спортсмены в CSV</button>
+      <button class="btn g" data-a="expRes">Результаты в CSV</button>
+    </div>
+    <div class="card"><b>Демо-данные</b>
+      <p class="muted" style="margin-top:4px">Сейчас в кабинете придуманные спортсмены. Когда загрузишь настоящих, удали демо.</p>
+      <button class="btn g" data-a="demo">Вернуть демо</button>
+      <button class="btn g" data-a="wipe">Удалить все данные</button>
+    </div>
+  </div>
+<div id="dt-th" style="display:none"></div>
+</section>
+</main>
+<div class="foot" aria-hidden="true"><svg class="fw" viewBox="0 0 480 80" preserveAspectRatio="none"><use href="#art-wave"/></svg><div class="fb"><svg class="f1" viewBox="0 0 64 32"><use href="#art-fish"/></svg><svg class="f2" viewBox="0 0 64 32"><use href="#art-fish"/></svg><svg class="f3" viewBox="0 0 64 32"><use href="#art-fish"/></svg><svg class="b1" viewBox="0 0 60 80"><use href="#art-bub"/></svg><svg class="b2" viewBox="0 0 60 80"><use href="#art-bub"/></svg></div></div>
+
+<div class="savebar off" id="saveBar"><span id="saveTxt"></span><button class="g" data-a="allp">Все были</button><button class="y" data-a="saveTr">Сохранить</button></div>
+
+<nav role="tablist" aria-label="Разделы">
+  <button role="tab" aria-selected="true" data-t="sp"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.500"/><circle cx="17" cy="9" r="2.500"/><path d="M2.500 20c0-4 3-6 6.500-6s6.500 2 6.500 6M16 14.500c3 0 5.500 1.500 5.500 5"/></svg>Люди</button>
+  <button role="tab" aria-selected="false" data-t="rc"><svg viewBox="0 0 24 24"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM7 6H4v1a3 3 0 0 0 3 3M17 6h3v1a3 3 0 0 1-3 3"/></svg>Рекорды</button>
+  <button role="tab" aria-selected="false" data-t="tr"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4M9 15l2 2 4-4"/></svg>Занятия</button>
+  <button role="tab" aria-selected="false" data-t="sb"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="3"/><path d="M3 10h18M16 14.500h2"/></svg>Сбор</button>
+  <button role="tab" aria-selected="false" data-t="pl"><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4h6v3H9zM9 12h6M9 16h4"/></svg>Планы</button>
+  <button role="tab" aria-selected="false" data-t="dt"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.600"/><circle cx="12" cy="12" r="1.600"/><circle cx="19" cy="12" r="1.600"/></svg>Ещё</button>
+</nav>
+
+<div class="sheet" id="sheet" hidden><div class="shin" id="shIn"></div></div>
+<datalist id="ranks"><option value="без разряда"><option value="III юношеский"><option value="II юношеский"><option value="I юношеский"><option value="III разряд"><option value="II разряд"><option value="I разряд"><option value="КМС"><option value="МС"></datalist>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// ===== дистанции World Aquatics (бассейн) =====
+const EV=[['в/с','Вольный стиль',[50,100,200,400,800,1500]],['спина','Спина',[50,100,200]],['брасс','Брасс',[50,100,200]],['батт','Баттерфляй',[50,100,200]],['к/п','Комплекс',[100,200,400]]];
+const DIST=[];EV.forEach(g=>g[2].forEach(d=>DIST.push(d+' '+g[0])));
+const lbl=e=>e.replace(' ',' м ');
+const BASE={'50 в/с':27.9,'100 в/с':61.3,'200 в/с':134.2,'400 в/с':285,'800 в/с':595,'1500 в/с':1140,'50 спина':31,'100 спина':68.5,'200 спина':150,'50 брасс':36,'100 брасс':78,'200 брасс':168,'50 батт':30.2,'100 батт':66,'200 батт':148,'100 к/п':70,'200 к/п':145,'400 к/п':315};
+const OK=['50 в/с','100 в/с','200 в/с','50 спина','100 спина','50 батт'];
+const OLD=[[31.05,68.42,150.75,33.10,75.90,34.80],[27.90,61.30,134.20,31.00,68.50,30.20],[30.40,66.90,147.10,34.60,76.80,33.90],[28.80,63.50,139.60,32.20,70.90,31.40],[29.90,65.80,144.30,33.70,73.20,32.80],[29.30,64.10,141.00,32.80,71.50,31.90],[32.60,71.20,156.40,35.10,78.30,35.70],[30.10,66.20,145.90,33.20,72.80,33.10]];
+const R0=OLD.map((row,i)=>{const f=row[1]/61.3;return DIST.map((e,j)=>{const k=OK.indexOf(e);if(k>=0)return row[k];if(e==='1500 в/с'&&![1,4,5].includes(i))return null;if(e==='800 в/с'&&![1,3,4,5].includes(i))return null;return +(BASE[e]*f*(1+(((i*7+j*3)%5)-2)*.012)).toFixed(2)})});
+
+// ===== вспомогательное =====
+const KEY='aqm-pro-v1',COLS=['var(--a0)','var(--a1)','var(--a2)'],MON=['янв','фев','мар','апр','мая','июн','июл','авг','сен','окт','ноя','дек'],DW=['вс','пн','вт','ср','чт','пт','сб'];
+const TODAY=new Date().toISOString().slice(0,10);
+const T=s=>{const m=Math.floor(s/60),x=(s-m*60).toFixed(2).padStart(5,'0');return m?m+':'+x:s.toFixed(2)};
+const fd=d=>{if(!d)return'';const [y,m,x]=d.split('-');return +x+' '+MON[+m-1]+' '+y};
+const dl2=d=>DW[new Date(d+'T12:00:00').getDay()]+' '+(+d.slice(8))+' '+MON[+d.slice(5,7)-1];
+const yr=w=>w.birth?w.birth.slice(0,4):'—';
+const ini=n=>{const p=n.trim().split(/\s+/);return (p[0][0]||'')+(p[1]?p[1][0]:'')};
+const short=n=>{const p=n.trim().split(/\s+/);return p[0]+(p[1]?' '+p[1][0]+'.':'')};
+const age=w=>w.birth?Math.floor((new Date(TODAY)-new Date(w.birth))/31557600000):'';
+const norm=s=>String(s||'').toLowerCase().replace(/ё/g,'е').replace(/[.,;]/g,' ').replace(/\s+/g,' ').trim();
+const colOf=w=>COLS[Math.max(0,S.sw.indexOf(w))%3];
+function parseT(x){x=String(x).trim().replace(',','.').replace(/^(\d+)\.(\d{1,2})\.(\d{1,2})$/,'$1:$2.$3');const m=x.match(/^(?:(\d+):)?(\d+(?:\.\d+)?)$/);return m?(+(m[1]||0))*60+parseFloat(m[2]):null}
+function parseEv(x){x=x.toLowerCase();const d=(x.match(/\d{2,4}/)||[])[0];const c=/воль|в\/с|free|кроль|\bfr\b/.test(x)?'в/с':/спин|back|бэк/.test(x)?'спина':/брасс|breast/.test(x)?'брасс':/баттер|дельф|fly|бат/.test(x)?'батт':/комплекс|к\/п|medley|\bim\b/.test(x)?'к/п':'';const e=d+' '+c;return DIST.includes(e)?e:null}
+function parseD(x){x=String(x).trim();if(/^\d{4}-\d{2}-\d{2}$/.test(x))return x;const m=x.match(/^(\d{1,2})[.\/](\d{1,2})[.\/](\d{4})$/);return m?`${m[3]}-${m[2].padStart(2,'0')}-${m[1].padStart(2,'0')}`:null}
+function parseCSV(t){const f0=t.split('\n')[0],d=f0.includes('\t')?'\t':f0.includes(';')?';':',',rows=[];let r=[],f='',q=false;
+  const push=()=>{r.push(f);f='';if(r.some(x=>x.trim()))rows.push(r.map(x=>x.trim()));r=[]};
+  for(let i=0;i<t.length;i++){const c=t[i];if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
+    else if(c==='"')q=true;else if(c===d){r.push(f);f=''}else if(c==='\n'||c==='\r'){if(c==='\r'&&t[i+1]==='\n')i++;push()}else f+=c}
+  push();return rows}
+const csvOut=rows=>rows.map(r=>r.map(x=>{x=String(x==null?'':x);return /[;"\n]/.test(x)?'"'+x.replace(/"/g,'""')+'"':x}).join(';')).join('\r\n');
+function dl(name,text,json){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([(json?'':'\uFEFF')+text],{type:json?'application/json':'text/csv;charset=utf-8'}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500)}
+function readText(f,cb){const r=new FileReader();r.onload=()=>{const b=r.result;let s=new TextDecoder('utf-8').decode(b);if(s.includes('\uFFFD'))s=new TextDecoder('windows-1251').decode(b);cb(s.replace(/^\uFEFF/,''))};r.readAsArrayBuffer(f)}
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),2600)}
+
+// ===== данные =====
+function seed(){
+  const rows=[['Ковалёва Мария','2012-05-14','Ж','Группа 2','I юношеский'],['Лебедев Артём','2011-02-03','М','Группа 1','II разряд'],['Рыбакова Софья','2012-09-21','Ж','Группа 2','III разряд'],['Морозов Даниил','2011-11-30','М','Группа 1','II разряд'],['Волкова Алиса','2012-01-17','Ж','Группа 2','I юношеский'],['Новиков Тимур','2013-04-08','М','Группа 3','III юношеский'],['Шмидт Виктория','2013-07-25','Ж','Группа 3','без разряда'],['Петров Егор','2012-03-12','М','Группа 2','II юношеский']];
+  const sw=rows.map((r,i)=>({id:'s'+(i+1),name:r[0],birth:r[1],sex:r[2],grp:r[3],rank:r[4],addr:'г. Минск, ул. Примерная, '+(10+i*3),phone:'+375 29 000-00-0'+(i+1),par:'Родитель '+r[0].split(' ')[0],ppar:'+375 29 111-11-0'+(i+1),note:''}));
+  const res=[],att={};let id=1;
+  const DT=['2026-03-14','2026-06-12','2026-10-11'],CP=['Открытый турнир «Весна»','Первенство области','Кубок Минска'],FA=[1.045,1.02,1];
+  sw.forEach((w,i)=>DIST.forEach((e,j)=>{const b=R0[i][j];if(b==null||!(j===1||(j+i)%4===0))return;DT.forEach((d,k)=>res.push({id:id++,sid:w.id,ev:e,t:+(b*(FA[k]+(k<2?((i+j+k)%3)*.003:0))).toFixed(2),date:d,comp:CP[k],pl:((i+j+k)%6)+1,pool:k===1?50:25}))}));
+  const SA=[{a:[6],s:[10],b:4.4},{a:[],s:[17],b:4.7},{a:[3],s:[],b:4.2},{a:[6,13,15],s:[],b:3.9},{a:[],s:[],b:4.6},{a:[8],s:[],b:4.1},{a:[1],s:[],b:4.0},{a:[10,17],s:[],b:3.8}];
+  const NT=['Хорошая работа ног','Следи за вдохом','Отличный темп','Чистая техника','Старалась до конца'];
+  [1,3,6,8,10,13,15,17].forEach(d=>{const k='2026-10-'+String(d).padStart(2,'0');att[k]={};sw.forEach((w,i)=>{const z=SA[i],c=z.a.includes(d)?'a':z.s.includes(d)?'s':'p';att[k][w.id]={c,r:c==='p'?Math.max(3,Math.min(5,Math.round(z.b+(((d*7+i*5)%5)-2)*.35))):0,n:c==='p'&&(d+i)%4===0?NT[(d+i)%5]:''}})});
+  const tpls=[{id:'t1',name:'Курсовка',ev:'100 в/с',reps:4,rest:'отдых 20 с'},{id:'t2',name:'Контрольный заплыв',ev:'200 в/с',reps:1,rest:''},{id:'t3',name:'Скоростная серия',ev:'50 в/с',reps:8,rest:'отдых 30 с'},{id:'t4',name:'Комплекс',ev:'200 к/п',reps:2,rest:'отдых 45 с'},{id:'t5',name:'Тест 400',ev:'400 в/с',reps:1,rest:''}];
+  const days={},NN=['Техника и ноги','Аэробная серия, следим за дыханием','Курсовка и скорость','Старты и повороты'];
+  Object.keys(att).sort().forEach((k,n)=>{const d=+k.slice(8);days[k]={vol:1800+((d*7)%9)*100,diff:2+(d%4),note:NN[n%4],sets:[]};
+    if(n%2===0){const q={id:'q'+n,name:'Курсовка',ev:'100 в/с',reps:4,rest:'отдых 20 с',times:{}};sw.forEach((w,i)=>{if(att[k][w.id]&&att[k][w.id].c==='p')q.times[w.id]=T(R0[i][1]*(1.045-n*.005)+((i*3+d)%5)*.05)});days[k].sets.push(q)}});
+  return {sw,res,att,nid:id,days,tpls,fund:[{id:'f1',title:'Первенство области, ноябрь',amt:25,items:[{sid:'s1',amt:25,paid:true},{sid:'s3',amt:25,paid:true},{sid:'s5',amt:25,paid:false},{sid:'s8',amt:25,paid:false}]}]};
+}
+let S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+if(!S||!Array.isArray(S.sw))S=seed();
+S.nid=S.nid||Math.max(0,...S.res.map(r=>r.id))+1;S.fund=S.fund||[];
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+function stats(sid){const r=S.res.filter(x=>x.sid===sid).sort((a,b)=>a.date<b.date?-1:1),m={};let pb=0,pod=0;
+  r.forEach(x=>{if(m[x.ev]!=null&&x.t<m[x.ev])pb++;if(m[x.ev]==null||x.t<m[x.ev])m[x.ev]=x.t;if(x.pl&&x.pl<=3)pod++});
+  const f=r.filter(x=>x.ev==='100 в/с');return {st:r.length,pb,pod,d:f.length>1?Math.min(...f.map(x=>x.t))-f[0].t:0}}
+function calc(sid){let p=0,a=0,s=0,m=0,rs=0,rn=0;Object.keys(S.att).forEach(d=>{const x=(S.att[d]||{})[sid];if(!x||!x.c)return;m++;if(x.c==='p'){p++;if(x.r){rs+=x.r;rn++}}else if(x.c==='a')a++;else s++});return {p,a,s,m,att:m?p/m:0,avg:rn?rs/rn:0}}
+const att=(d,sid)=>{S.att[d]=S.att[d]||{};return S.att[d][sid]||(S.att[d][sid]={c:'',r:0,n:''})};
+function match(name){const t=norm(name).split(' ');if(!t[0])return[];
+  for(const [sn,gn] of [[t[0],t[1]||''],[t[1]||'',t[0]]]){if(!sn)continue;
+    const L=S.sw.filter(w=>{const p=norm(w.name).split(' ');if(p[0]!==sn)return false;if(!gn)return true;const g=p[1]||'';return g===gn||(gn.length===1&&g[0]===gn)||g.startsWith(gn)});
+    if(L.length)return L}
+  return[]}
+
+// ===== интерфейс =====
+const ui={tab:'sp',q:'',sex:'Все',grp:'Все',sort:'А–Я',rSex:'Все',rYear:'Все',dist:'100 в/с',cur:TODAY,tg:'Все',an:'att',aSort:'Посещаемость',xSort:'Рекорды',dt:'pr',open:null,edit:false,pev:null,rv:'rank',tv:'mark',ff:'Все',fund:null,plan:null,plLv:'Все',plF:'Все',pool:'25',cm:TODAY.slice(0,7),hof:null,day:null,coach:false};
+const ch=(list,cur,k)=>list.map(x=>`<button aria-pressed="${x[0]===cur}" data-k="${k}" data-v="${esc(x[0])}">${esc(x[1])}</button>`).join('');
+const VB={wave:'0 0 480 80',fish:'0 0 64 32',bub:'0 0 60 80'};
+const art=(n,c)=>`<svg class="${c}" viewBox="${VB[n]}" aria-hidden="true"${n==='wave'?' preserveAspectRatio="none"':''}><use href="#art-${n}"/></svg>`;
+const empty=m=>`<div class="empty">${art('fish','e1')}${art('bub','e2')}<p>${m}</p></div>`;
+const strokeChips=()=>{const g=EV.find(x=>x[0]===ui.dist.split(' ')[1]);return EV.map(x=>`<button aria-pressed="${x===g}" data-k="stroke" data-v="${x[0]}">${x[1]}</button>`).join('')+'';}
+const distChips=()=>{const g=EV.find(x=>x[0]===ui.dist.split(' ')[1]);return g[2].map(d=>{const e=d+' '+g[0];return `<button aria-pressed="${e===ui.dist}" data-k="dist" data-v="${e}">${d} м${e==='100 к/п'?' (25 м)':''}</button>`}).join('')};
+const stars=n=>[1,2,3,4,5].map(i=>`<svg width="16" height="16" style="fill:${i<=Math.round(n)?'var(--star)':'var(--star-off)'}"><use href="#star"/></svg>`).join('');
+
+function drawSp(){
+  const grps=['Все',...new Set(S.sw.map(w=>w.grp).filter(Boolean))];
+  $('fSex').innerHTML=ch([['Все','Все'],['Ж','Девочки'],['М','Мальчики']],ui.sex,'sex');
+  $('fGrp').innerHTML=ch(grps.map(g=>[g,g]),ui.grp,'grp');
+  $('fSort').innerHTML=ch(['А–Я','Год рожд.','Посещаемость','Рекорды'].map(x=>[x,x]),ui.sort,'sort');
+  const q=norm(ui.q);
+  const L=S.sw.filter(w=>(ui.sex==='Все'||w.sex===ui.sex)&&(ui.grp==='Все'||w.grp===ui.grp)&&(!q||norm([w.name,w.addr,w.phone,w.par,w.ppar,w.rank,w.grp,yr(w)].join(' ')).includes(q)));
+  L.sort({'А–Я':(a,z)=>a.name.localeCompare(z.name,'ru'),'Год рожд.':(a,z)=>(z.birth||'').localeCompare(a.birth||''),'Посещаемость':(a,z)=>calc(z.id).att-calc(a.id).att,'Рекорды':(a,z)=>stats(z.id).pb-stats(a.id).pb}[ui.sort]);
+  $('spCount').textContent='Найдено: '+L.length+' из '+S.sw.length;
+  $('spList').innerHTML=L.map(w=>{const c=calc(w.id);return `<div class="card sp" data-a="open" data-id="${w.id}" role="button" tabindex="0"><div class="av2" style="background:${colOf(w)}">${esc(ini(w.name))}</div><div><b>${esc(w.name)}</b><span class="muted">${yr(w)} г.р. · ${esc(w.grp||'без группы')} · ${esc(w.rank||'без разряда')}</span></div><div class="r"><b>${c.m?Math.round(c.att*100)+'%':'—'}</b><br><small>посещ.</small></div></div>`}).join('')||empty('Никого не найдено. Добавь спортсмена или загрузи список во вкладке «Ещё».');
+}
+const trList=()=>S.sw.filter(w=>ui.tg==='Все'||w.grp===ui.tg);
+function anAtt(el){
+  const A=S.sw.map(w=>({w,...calc(w.id)})),m=A.filter(x=>x.m),avg=m.length?m.reduce((a,x)=>a+x.att,0)/m.length:0,low=m.filter(x=>x.att<.75);
+  const k={'Посещаемость':x=>-x.att,'Оценка':x=>-x.avg,'Пропуски':x=>-(x.a+x.s)}[ui.aSort];
+  el.innerHTML=`<div class="sum" style="grid-template-columns:1fr 1fr;margin-top:12px"><div class="card"><span class="muted">средняя посещаемость</span><b>${Math.round(avg*100)}%</b></div><div class="card ${low.length?'acc':''}"><span class="muted">ниже 75%</span><b>${low.length}</b><span style="font-size:12px">${esc(low.map(x=>short(x.w.name)).join(', '))}</span></div></div><div class="chips">${ch(['Посещаемость','Оценка','Пропуски'].map(x=>[x,x]),ui.aSort,'aSort')}</div>`+
+    (A.sort((a,z)=>k(a)-k(z)).map(x=>`<div class="card gs" data-a="open" data-id="${x.w.id}"><div class="h"><div class="av2" style="background:${colOf(x.w)}">${esc(ini(x.w.name))}</div><b>${esc(x.w.name)}</b>${x.m&&x.att<.75?'<span class="tag">внимание</span>':''}<span class="pct">${x.m?Math.round(x.att*100)+'%':'—'}</span></div><div class="bar"><i class="${x.att<.75?'low':''}" style="width:${x.att*100}%"></i></div><div class="nums"><div><b>${x.a}</b><small>пропусков</small></div><div><b>${x.s}</b><small>болезней</small></div><div><b>${x.avg?x.avg.toFixed(1).replace('.',','):'—'}</b><small>оценка</small></div></div></div>`).join('')||empty('Пока нет спортсменов.'));
+}
+function anRes(el){
+  const X=S.sw.map(w=>({w,...stats(w.id)})),tot=k=>X.reduce((a,x)=>a+x[k],0);
+  const k={'Рекорды':x=>-x.pb,'Старты':x=>-x.st,'Призовые':x=>-x.pod,'Прогресс':x=>x.d}[ui.xSort];
+  el.innerHTML=`<div class="sum" style="margin-top:12px"><div class="card"><span class="muted">стартов</span><b>${tot('st')}</b></div><div class="card acc"><span class="muted">улучшений</span><b>${tot('pb')}</b></div><div class="card"><span class="muted">призовых</span><b>${tot('pod')}</b></div></div><div class="chips">${ch(['Рекорды','Старты','Призовые','Прогресс'].map(x=>[x,x]),ui.xSort,'xSort')}</div>`+
+    (X.sort((a,z)=>k(a)-k(z)).map(x=>`<div class="card gs" data-a="open" data-id="${x.w.id}"><div class="h"><div class="av2" style="background:${colOf(x.w)}">${esc(ini(x.w.name))}</div><b>${esc(x.w.name)}</b><span class="pct" style="font-size:16px">${x.d?(x.d>0?'+':'−')+Math.abs(x.d).toFixed(1).replace('.',',')+' с':'—'}</span></div><div class="nums"><div><b>${x.st}</b><small>стартов</small></div><div><b>${x.pb}</b><small>улучшений</small></div><div><b>${x.pod}</b><small>призовых</small></div></div><div class="muted" style="margin-top:8px;font-size:12px">справа: изменение на 100 в/с за всё время</div></div>`).join('')||empty('Пока нет спортсменов.'));
+}
+// ===== профиль =====
+function editForm(w){
+  w=w||{name:'',birth:'',sex:'Ж',grp:ui.grp!=='Все'?ui.grp:'',rank:'',addr:'',phone:'',par:'',ppar:'',note:''};
+  const f=(id,l,v,t)=>`<label class="muted" style="display:block;margin-top:10px">${l}<input class="in" id="${id}" type="${t||'text'}" value="${esc(v)}" style="margin-top:4px"></label>`;
+  return `<div class="ph"><h2>${ui.open==='new'?'Новый спортсмен':'Редактирование'}</h2><button class="x" data-a="cancel" aria-label="Закрыть">×</button></div>
+  ${f('fN','ФИО (фамилия и имя)',w.name)}${f('fB','Дата рождения',w.birth,'date')}
+  <label class="muted" style="display:block;margin-top:10px">Пол<select class="in" id="fS" style="margin-top:4px"><option value="Ж" ${w.sex==='Ж'?'selected':''}>Девочка</option><option value="М" ${w.sex==='М'?'selected':''}>Мальчик</option></select></label>
+  ${f('fG','Группа',w.grp)}<label class="muted" style="display:block;margin-top:10px">Разряд<input class="in" id="fR" list="ranks" value="${esc(w.rank)}" style="margin-top:4px"></label>
+  ${f('fA','Адрес',w.addr)}${f('fP','Телефон',w.phone,'tel')}${f('fPar','Родитель (ФИО)',w.par)}${f('fPp','Телефон родителя',w.ppar,'tel')}${f('fNote','Заметка',w.note)}
+  <button class="btn" data-a="saveSw">Сохранить</button><button class="btn g" data-a="cancel">Отмена</button>`;
+}
+function renderAll(){$('cnt').textContent=S.sw.length+' спортсменов';drawSp();drawRc();drawTr();drawSb();drawPl();drawDt();drawProfile()}
+
+// ===== оформление =====
+const THEMES=[['sand','Песок и море',['#EEE5D6','#9FC5D9','#D9BE91'],'#EEE5D6'],['fog','Туман',['#E4EAEE','#A3BBCB','#D6C9B0'],'#E4EAEE'],['lagoon','Лагуна',['#E4EEE9','#8FC1B5','#E0CFA6'],'#E4EEE9'],['lavender','Лаванда',['#EDE8F2','#B7A9D6','#E2CDB0'],'#EDE8F2'],['rose','Розовый песок',['#F4E8E6','#DFA9B3','#DFA9B3'],'#F4E8E6'],['mint','Мята',['#ECF1E4','#9CC7A8','#E0D2A4'],'#ECF1E4'],['sunset','Закат',['#F3E6DB','#E3A98B','#E3A98B'],'#F3E6DB'],['ocean','Океан',['#D9E7F0','#6FA3C7','#DCCFA8'],'#D9E7F0'],['night','Ночь',['#17263A','#86B2D1','#E3BC6A'],'#17263A'],['graphite','Графит',['#26292C','#C9B58C','#C9B58C'],'#26292C']];
+const TC=Object.fromEntries(THEMES.map(t=>[t[0],t[3]]));
+function setTheme(v){document.documentElement.dataset.theme=v;try{localStorage.setItem('aqm-theme',v)}catch(e){}$('tcol').content=TC[v]||TC.sand}
+// ===== сбор средств =====
+const rub=n=>(Math.round((+n||0)*100)/100).toString().replace('.',',')+' руб.';
+const curFund=()=>S.fund.find(f=>f.id===ui.fund);
+const fAmt=f=>{const el=$('fAmt'),a=+(el&&el.value)||+f.amt||0;f.amt=a;return a};
+function fstat(f){let tot=0,got=0,np=0;f.items.forEach(i=>{tot+=+i.amt||0;if(i.paid){got+=+i.amt||0;np++}});return {tot,got,np,n:f.items.length}}
+function drawSb(){
+  $('fundList').innerHTML=S.fund.length?S.fund.map(f=>{const s=fstat(f),p=s.tot?s.got/s.tot*100:0;
+    return `<div class="card gs" data-a="fundOpen" data-id="${f.id}" role="button" tabindex="0"><div class="h"><b>${esc(f.title)}</b>${s.n&&s.np===s.n?'<span class="tag">закрыт</span>':''}</div><div class="muted" style="margin-top:4px">Собрано ${rub(s.got)} из ${rub(s.tot)}</div><div class="bar"><i style="width:${p}%"></i></div><div class="muted" style="margin-top:8px;font-size:13px">сдали ${s.np} из ${s.n}</div></div>`}).join(''):empty('Сборов пока нет. Создай первый: на соревнование, форму или поездку.');
+}
+function fundSum(){const f=curFund();if(!f)return;const s=fstat(f);
+  if($('fGot')){$('fGot').textContent=rub(s.got);$('fOf').textContent='из '+rub(s.tot)+' · сдали '+s.np+'/'+s.n;$('fBar').style.width=(s.tot?s.got/s.tot*100:0)+'%'}
+  drawSb()}
+function fundView(f){
+  const s=fstat(f),p=s.tot?s.got/s.tot*100:0,have=new Set(f.items.map(i=>i.sid)),rest=S.sw.filter(w=>!have.has(w.id));
+  const L=f.items.filter(i=>ui.ff==='Все'||!i.paid),grps=[...new Set(S.sw.map(w=>w.grp).filter(Boolean))];
+  return `${art('wave','dsh')}<div class="ph"><h2>Сбор средств</h2><button class="x" data-a="close" aria-label="Закрыть">×</button></div>
+  <input class="in" id="fTitle" value="${esc(f.title)}" aria-label="Название сбора">
+  <div class="card"><div class="bar2" style="margin:0"><b class="num" id="fGot">${rub(s.got)}</b><span class="muted" id="fOf">из ${rub(s.tot)} · сдали ${s.np}/${s.n}</span></div><div class="bar"><i id="fBar" style="width:${p}%"></i></div></div>
+  <div class="chips">${ch([['Все','Все'],['Не сдали','Не сдали']],ui.ff,'ff')}</div>
+  ${L.map(i=>{const w=S.sw.find(x=>x.id===i.sid);if(!w)return'';
+    return `<div class="card frow"><button class="ck" data-a="paid" data-id="${i.sid}" role="checkbox" aria-checked="${!!i.paid}" aria-label="Сдал: ${esc(w.name)}"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.500 4.500L19 7.500"/></svg></button><div><b>${esc(w.name)}</b><br><span class="muted">${esc(w.grp||'')}</span></div><label class="amt"><input class="in famt" type="number" min="0" step="0.5" data-id="${i.sid}" value="${i.amt}" aria-label="Сумма"><span>руб.</span></label><button class="x2" data-a="fdel" data-id="${i.sid}" aria-label="Убрать из сбора">×</button></div>`}).join('')||empty(f.items.length?'Все сдали. Отлично!':'Добавь спортсменов в сбор.')}
+  <div class="card"><b>Добавить участников</b>
+    <div class="two" style="grid-template-columns:1fr auto"><select class="in" id="fSel" aria-label="Спортсмен">${rest.map(w=>`<option value="${w.id}">${esc(w.name)}</option>`).join('')||'<option value="">все уже добавлены</option>'}</select><button class="btn s" data-a="fadd" style="margin-top:8px" aria-label="Добавить">+</button></div>
+    <div class="chips">${grps.map(g=>`<button data-a="faddg" data-v="${esc(g)}">+ ${esc(g)}</button>`).join('')}</div>
+    <div class="two" style="grid-template-columns:1fr auto"><input class="in" id="fAmt" type="number" min="0" step="0.5" value="${f.amt}" aria-label="Сумма с каждого, руб."><button class="btn s g" data-a="fapply" style="margin-top:8px">Сумма всем</button></div>
+    <p class="muted" style="margin-top:6px;font-size:12px">Сумма подставляется новым участникам; «Сумма всем» меняет её у тех, кто ещё не сдал.</p></div>
+  <button class="btn" data-a="fcopy">Скопировать список «не сдали»</button>
+  <button class="btn g" data-a="fdelete">Удалить сбор</button>`;
+}
+function copyDebts(){const f=curFund();if(!f)return;
+  const L=f.items.filter(i=>!i.paid).map((i,n)=>{const w=S.sw.find(x=>x.id===i.sid);return (n+1)+'. '+(w?w.name:'?')+' — '+rub(i.amt)});
+  const txt=f.title+'\nНе сдали ('+L.length+'):\n'+(L.join('\n')||'все сдали');
+  (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>toast('Список скопирован'),()=>{prompt('Скопируй список:',txt)})}
+
+// ===== программы тренировок (5–6 классы, 10–12 лет) =====
+// строка: [повторы, дистанция в метрах, описание, отдых]
+const PL=[
+{id:'p1',t:'Техника вольного стиля',f:'Техника',lv:5,min:60,n:'Следи за длинным гребком и положением головы. Цель серии: на 1 гребок меньше на 25 м при том же времени.',s:[
+ ['Разминка',[[1,200,'в/с лёгко',''],[4,50,'25 дриль / 25 плавание','отдых 15 с'],[2,100,'в/с и спина по выбору','отдых 20 с']]],
+ ['Техника',[[6,25,'дриль: кулачки, затем «поймай воду»','отдых 15 с'],[4,50,'в/с: 6 ударов ногами на 1 гребок','отдых 20 с']]],
+ ['Основная серия',[[6,100,'в/с, считай гребки на каждых 25 м','отдых 20 с']]],
+ ['Ноги',[[4,50,'ноги с доской','отдых 20 с']]],
+ ['Заминка',[[1,200,'любым стилем очень легко','']]]]},
+{id:'p2',t:'Все четыре стиля',f:'Комплекс',lv:5,min:60,n:'Не гонись за скоростью. Чистые повороты и касание стенки двумя руками в брассе и баттерфляе.',s:[
+ ['Разминка',[[1,200,'в/с лёгко',''],[4,50,'по стилю: в/с, спина, брасс, баттерфляй','отдых 15 с']]],
+ ['Техника',[[4,50,'25 дриль / 25 плавание на каждом стиле','отдых 20 с']]],
+ ['Основная серия',[[4,100,'комплекс: по 25 каждым стилем','отдых 30 с'],[4,50,'брасс или баттерфляй на выбор, техника','отдых 20 с']]],
+ ['Ноги',[[4,50,'ноги на спине или на боку','отдых 20 с']]],
+ ['Заминка',[[1,200,'лёгко','']]]]},
+{id:'p3',t:'Аэробная база',f:'Выносливость',lv:5,min:60,n:'Ровный темп без «взрывов». Если ребёнок не укладывается в отдых, добавь 5 секунд.',s:[
+ ['Разминка',[[1,300,'в/с / спина через 50',''],[4,50,'в/с с дриль на 25 м','отдых 15 с']]],
+ ['Основная серия',[[4,50,'в/с с колобашкой','отдых 15 с'],[8,100,'в/с ровным темпом, две серии по 4','отдых 15 с, между сериями 1 мин']]],
+ ['Ноги',[[4,50,'ноги с доской, плавно','отдых 20 с']]],
+ ['Заминка',[[1,200,'любым стилем легко','']]]]},
+{id:'p4',t:'Старты и повороты',f:'Скорость',lv:5,min:60,n:'Короткие быстрые отрезки и длинный отдых. Качество старта и поворота важнее скорости.',s:[
+ ['Разминка',[[1,200,'в/с',''],[4,50,'25 дриль / 25 плавание','отдых 15 с']]],
+ ['Техника',[[6,15,'старт с тумбы, выход и 4 гребка','отдых 30 с'],[6,25,'поворот-кувырок на середине, затем плавание','отдых 20 с']]],
+ ['Основная серия',[[8,25,'в/с максимальная скорость со старта','отдых 30 с'],[4,50,'в/с быстро, чистый поворот','отдых 40 с'],[4,50,'в/с лёгко','отдых 15 с']]],
+ ['Ноги',[[4,50,'ноги, на второй 25 ускорение','отдых 20 с']]],
+ ['Заминка',[[1,200,'лёгко','']]]]},
+{id:'p5',t:'Темп и дистанция',f:'Выносливость',lv:6,min:75,n:'Держим одинаковое время на каждом повторе. Следи за дыханием и длиной гребка к концу серии.',s:[
+ ['Разминка',[[1,400,'в/с по 100: ноги / дриль / дриль / плавание',''],[4,50,'по стилю, смена на каждом 50','отдых 15 с']]],
+ ['Подводка',[[6,50,'в/с build (нарастание скорости)','отдых 15 с']]],
+ ['Основная серия',[[3,200,'в/с ровным темпом, считать время и гребки','отдых 30 с'],[4,100,'в/с чуть быстрее, держать темп','отдых 20 с']]],
+ ['Pull',[[4,100,'с колобашкой, дыхание на 3','отдых 15 с']]],
+ ['Заминка',[[1,200,'легко','']]]]},
+{id:'p6',t:'Комплексное плавание',f:'Комплекс',lv:6,min:75,n:'Порядок: баттерфляй, спина, брасс, вольный стиль. Следи за чистыми переходами между стилями.',s:[
+ ['Разминка',[[1,300,'в/с / спина',''],[4,50,'по стилю с дриль на 25 м','отдых 15 с']]],
+ ['Техника',[[4,75,'комплекс по 25: батт, спина, брасс, в/с','отдых 20 с']]],
+ ['Основная серия',[[4,100,'комплекс, второй 50 быстрее','отдых 30 с'],[2,200,'комплекс ровно, чистые переходы','отдых 45 с']]],
+ ['Ноги',[[6,50,'ноги по кругу: дельфин на спине, спина, брасс','отдых 20 с']]],
+ ['Заминка',[[1,200,'легко','']]]]},
+{id:'p7',t:'Скорость на 50 и 100 м',f:'Скорость',lv:6,min:70,n:'Мало повторов, максимум качества, полный отдых. Если скорость падает, заканчивай серию.',s:[
+ ['Разминка',[[1,300,'в/с лёгко',''],[6,50,'build: 25 лёгко / 25 быстро','отдых 15 с']]],
+ ['Техника',[[6,25,'старт и 15 м под водой с ногами','отдых 30 с']]],
+ ['Основная серия',[[6,25,'максимум со старта','отдых 40 с'],[4,50,'максимум, считать гребки','отдых 1 мин'],[2,100,'в/с быстро (около 95%)','отдых 1:30']]],
+ ['Восстановление',[[4,100,'лёгкий в/с или спина','отдых 15 с']]],
+ ['Заминка',[[1,200,'легко','']]]]},
+{id:'p8',t:'Брасс и баттерфляй: техника',f:'Техника',lv:6,min:75,n:'Брасс: ноги, скольжение, руки. Баттерфляй: волна от груди, без напряжения в плечах.',s:[
+ ['Разминка',[[1,300,'в/с / спина',''],[4,50,'в/с с дриль','отдых 15 с']]],
+ ['Техника',[[8,25,'брасс: ноги — скольжение — руки, затем плавание','отдых 15 с'],[8,25,'баттерфляй: дриль 3 правой / 3 левой, затем плавание','отдых 20 с']]],
+ ['Основная серия',[[6,100,'25 баттерфляй (ноги) / 25 в/с / 50 брасс','отдых 25 с'],[4,50,'брасс, считать гребки','отдых 20 с']]],
+ ['Ноги',[[4,100,'ноги: брасс / дельфин на спине по 50','отдых 20 с']]],
+ ['Заминка',[[1,200,'легко','']]]]}
+];
+const vol=p=>p.s.reduce((a,sec)=>a+sec[1].reduce((b,r)=>b+r[0]*r[1],0),0);
+function drawPl(){
+  $('plLv').innerHTML=ch([['Все','Все'],['5','5 класс'],['6','6 класс']],ui.plLv,'plLv');
+  $('plF').innerHTML=ch(['Все','Техника','Выносливость','Скорость','Комплекс'].map(x=>[x,x]),ui.plF,'plF');
+  const L=PL.filter(p=>(ui.plLv==='Все'||String(p.lv)===ui.plLv)&&(ui.plF==='Все'||p.f===ui.plF));
+  $('plList').innerHTML=L.map(p=>`<div class="card gs" data-a="planOpen" data-id="${p.id}" role="button" tabindex="0"><div class="h"><b>${p.t}</b><span class="tag n">${p.lv} класс</span></div><div class="muted" style="margin-top:4px">${p.f} · ${p.min} мин · ${vol(p)} м</div></div>`).join('')||empty('Для такого сочетания программ пока нет.');
+}
+function planView(p){
+  const tot=vol(p);
+  const secs=p.s.map(sec=>{const v=sec[1].reduce((a,r)=>a+r[0]*r[1],0);return `<div class="sec">${sec[0]}<span>${v} м</span></div>`+sec[1].map(r=>`<div class="set"><b>${r[0]}×${r[1]}</b><span>${r[2]}</span>${r[3]?`<small>${r[3]}</small>`:''}</div>`).join('')}).join('');
+  return `${art('wave','dsh')}<div class="ph"><div><h2>${p.t}</h2><span class="muted">${p.lv} класс · ${p.min} мин · ${tot} м</span></div><button class="x" data-a="close" aria-label="Закрыть">×</button></div>
+  <div class="tags"><span class="tag">${p.f}</span><span class="tag n">${p.lv} класс</span></div>
+  <div class="card">${secs}<div class="sec" style="border-top:2px solid var(--line);margin-top:12px;padding-top:10px">Всего<span style="font-size:15px;color:var(--strong)">${tot} м</span></div></div>
+  <div class="card"><b>Совет тренеру</b><p class="muted" style="margin-top:4px;font-size:14px">${p.n}</p></div>
+  <button class="btn" data-a="planCopy">Скопировать программу</button>`;
+}
+function copyPlan(){const p=PL.find(x=>x.id===ui.plan);if(!p)return;
+  const txt=p.t+' · '+p.lv+' класс · '+p.min+' мин · '+vol(p)+' м\n\n'+p.s.map(sec=>sec[0]+'\n'+sec[1].map(r=>r[0]+'×'+r[1]+' '+r[2]+(r[3]?' ('+r[3]+')':'')).join('\n')).join('\n\n')+'\n\n'+p.n;
+  (navigator.clipboard?navigator.clipboard.writeText(txt):Promise.reject()).then(()=>toast('Программа скопирована'),()=>{prompt('Скопируй программу:',txt)})}
+
+// ===== Word (.docx) =====
+const wx=s=>String(s==null?'':s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+const wP=(t,o={})=>`<w:p>${o.sp?`<w:pPr><w:spacing w:before="${o.sp}" w:after="100"/></w:pPr>`:''}<w:r><w:rPr>${o.b?'<w:b/>':''}${o.c?`<w:color w:val="${o.c}"/>`:''}<w:sz w:val="${o.z||18}"/></w:rPr><w:t xml:space="preserve">${wx(t)}</w:t></w:r></w:p>`;
+const WSW=[['ФИО',2400],['Дата рождения',1300],['Пол',600],['Разряд',1400],['Адрес',3000],['Телефон',1600],['Родитель',1800],['Телефон родителя',1600],['Заметка',1698]];
+const WRS=[['ФИО',3000],['Дистанция',2200],['Время',1800],['Место',1200],['Дата',1800],['Бассейн',1000],['Соревнование',4398]];
+function wTbl(cols,rows){
+  const b=['top','left','bottom','right','insideH','insideV'].map(x=>`<w:${x} w:val="single" w:sz="4" w:space="0" w:color="9BB7BF"/>`).join('');
+  const c=(t,w,h)=>`<w:tc><w:tcPr><w:tcW w:w="${w}" w:type="dxa"/>${h?'<w:shd w:val="clear" w:color="auto" w:fill="D9F1F4"/>':''}</w:tcPr>${wP(t,{b:h})}</w:tc>`;
+  return `<w:tbl><w:tblPr><w:tblW w:w="15398" w:type="dxa"/><w:tblBorders>${b}</w:tblBorders><w:tblLayout w:type="fixed"/></w:tblPr><w:tblGrid>${cols.map(x=>`<w:gridCol w:w="${x[1]}"/>`).join('')}</w:tblGrid><w:tr><w:trPr><w:tblHeader/></w:trPr>${cols.map(x=>c(x[0],x[1],1)).join('')}</w:tr>${rows.map(r=>`<w:tr>${cols.map((x,i)=>c(r[i],x[1])).join('')}</w:tr>`).join('')}</w:tbl>`;
+}
+const blankRows=n=>Array.from({length:n},()=>[]);
+function docXml(withData){
+  const gs=[];
+  if(withData){const m={};S.sw.forEach(w=>{const g=w.grp||'Без группы';(m[g]=m[g]||[]).push(w)});Object.keys(m).sort((a,b)=>a.localeCompare(b,'ru',{numeric:true})).forEach(g=>gs.push([g,m[g]]))}
+  if(!gs.length)['Группа 1','Группа 2','Группа 3'].forEach(g=>gs.push([g,[]]));
+  const fmt=b=>b?b.split('-').reverse().join('.'):'';
+  const body=[wP('AQUAMINSKMIR · данные групп',{b:1,z:34}),
+    wP('Как заполнять: под заголовком каждой группы своя таблица, один спортсмен в строке. Дата рождения: ДД.ММ.ГГГГ. Пол: Ж или М. Строки можно добавлять, названия колонок не меняй. Название группы берётся из заголовка над таблицей. Новые результаты вписывай в последнюю таблицу.',{c:'4A6F7D',z:20})];
+  gs.forEach(([g,L])=>{
+    body.push(wP(/^групп/i.test(g)?g:'Группа: '+g,{b:1,z:28,sp:280}));
+    body.push(wTbl(WSW,[...L.map(w=>[w.name,fmt(w.birth),w.sex,w.rank,w.addr,w.phone,w.par,w.ppar,w.note]),...blankRows(withData?5:12)]));
+  });
+  body.push(wP('Результаты соревнований',{b:1,z:28,sp:280}));
+  body.push(wP('Дистанция, например: 100 в/с, 200 брасс, 400 к/п. Время: 1:08.42. Дата: ДД.ММ.ГГГГ.',{c:'4A6F7D',z:20}));
+  body.push(wTbl(WRS,blankRows(12)));
+  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'+body.join('')+'<w:sectPr><w:pgSz w:w="16838" w:h="11906" w:orient="landscape"/><w:pgMar w:top="720" w:right="720" w:bottom="720" w:left="720" w:header="360" w:footer="360" w:gutter="0"/></w:sectPr></w:body></w:document>';
+}
+async function docBlob(withData){
+  const Z=new JSZip();
+  Z.file('[Content_Types].xml','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/></Types>');
+  Z.file('_rels/.rels','<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/></Relationships>');
+  Z.file('word/document.xml',docXml(withData));
+  return Z.generateAsync({type:'blob',mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+}
+async function makeDocx(withData){
+  if(typeof JSZip==='undefined')return toast('Для Word нужен интернет: библиотека не загрузилась');
+  const blob=await docBlob(withData),a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);a.download=withData?'aquaminskmir-данные-групп.docx':'aquaminskmir-шаблон-групп.docx';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1500);
+  toast(withData?'Word с текущими данными скачан':'Шаблон Word скачан');
+}
+async function readDocx(file){
+  const z=await JSZip.loadAsync(await file.arrayBuffer()),xml=await z.file('word/document.xml').async('string');
+  const d=new DOMParser().parseFromString(xml,'application/xml'),body=d.getElementsByTagName('w:body')[0];
+  const ptxt=p=>[...p.getElementsByTagName('w:t')].map(t=>t.textContent).join('');
+  const ctxt=tc=>[...tc.getElementsByTagName('w:p')].map(ptxt).join(' ').trim();
+  const out=[];
+  [...body.children].forEach(n=>{
+    if(n.tagName==='w:p')out.push({p:ptxt(n)});
+    else if(n.tagName==='w:tbl')out.push({rows:[...n.children].filter(c=>c.tagName==='w:tr').map(tr=>[...tr.children].filter(c=>c.tagName==='w:tc').map(ctxt))});
+  });
+  return out;
+}
+const hIdx=(h,re,not)=>h.findIndex(c=>re.test(c)&&!(not&&not.test(c)));
+async function importDocx(file){
+  if(typeof JSZip==='undefined')return toast('Для Word нужен интернет: библиотека не загрузилась');
+  let blocks;try{blocks=await readDocx(file)}catch(e){return toast('Не удалось прочитать файл Word')}
+  let grp='',add=0,upd=0,found=false;const seen=new Set(),resRows=[];
+  blocks.forEach(b=>{
+    if(b.p!=null){const t=b.p.trim();if(/^группа\s*:/i.test(t))grp=t.replace(/^группа\s*:\s*/i,'');else if(/^групп/i.test(t)&&t.length<60)grp=t;if(/^без группы$/i.test(grp))grp='';return}
+    const rows=b.rows;if(!rows||!rows.length)return;const h=rows[0].map(c=>c.toLowerCase());
+    if(h.some(c=>/дистанц/.test(c))&&h.some(c=>/врем/.test(c))){
+      const m={n:hIdx(h,/фио|фамил|спортсмен/),ev:hIdx(h,/дистанц/),t:hIdx(h,/врем/),pl:hIdx(h,/мест/),d:hIdx(h,/дат/),c:hIdx(h,/соревн|турнир/),pool:hIdx(h,/бассейн/)};
+      rows.slice(1).forEach(r=>{const g=i=>i>=0?(r[i]||''):'';if(!g(m.n).trim()||!g(m.t).trim())return;resRows.push([g(m.n),g(m.ev),g(m.t),g(m.pl),g(m.d),g(m.c),g(m.pool)])});return}
+    if(h.some(c=>/фио|фамил/.test(c))){
+      found=true;
+      const m={n:hIdx(h,/фио|фамил|спортсмен/),b:hIdx(h,/рожд/),sx:hIdx(h,/^пол/),g:hIdx(h,/групп/),rk:hIdx(h,/разряд/),a:hIdx(h,/адрес/),pp:hIdx(h,/тел.*родит|родит.*тел/),par:hIdx(h,/родит/,/тел/),ph:hIdx(h,/тел/,/родит/),nt:hIdx(h,/заметк|примеч/)};
+      rows.slice(1).forEach(r=>{const g=i=>i>=0?(r[i]||'').trim():'';const name=g(m.n);if(!name||/пример/i.test(name))return;
+        const sx=g(m.sx),d={name,birth:parseD(g(m.b))||'',sex:/^(ж|f|дев)/i.test(sx)?'Ж':/^(м|m|мал)/i.test(sx)?'М':'',grp:g(m.g)||grp,rank:g(m.rk),addr:g(m.a),phone:g(m.ph),par:g(m.par),ppar:g(m.pp),note:g(m.nt)};
+        seen.add(norm(name));
+        const ex=S.sw.find(w=>norm(w.name)===norm(name));
+        if(ex){Object.keys(d).forEach(k=>{if(d[k])ex[k]=d[k]});upd++}else{S.sw.push({id:'s'+Date.now()+'_'+add,...d});add++}});
+    }
+  });
+  if(!found&&!resRows.length)return toast('В файле не нашлось таблиц с колонкой «ФИО»');
+  let removed=0;
+  if($('docSync').checked&&found){const gone=S.sw.filter(w=>!seen.has(norm(w.name)));
+    if(gone.length&&confirm('Удалить '+gone.length+' спортсменов, которых нет в файле, вместе с их результатами и отметками?')){
+      const ids=new Set(gone.map(w=>w.id));S.sw=S.sw.filter(w=>!ids.has(w.id));S.res=S.res.filter(r=>!ids.has(r.sid));Object.values(S.att).forEach(d=>ids.forEach(i=>delete d[i]));S.fund.forEach(f=>f.items=f.items.filter(i=>!ids.has(i.sid)));removed=gone.length}}
+  save();
+  let msg='Люди: добавлено '+add+', обновлено '+upd+(removed?', удалено '+removed:'');
+  if(resRows.length){buildPRV(resRows);ui.dt='pr';drawPrv();msg+='. Результаты ждут проверки во вкладке «Протокол»'}
+  renderAll();toast(msg);
+}
+
+// ===== v3: нормативы, зал славы, протоколы, журнал, дни, графики, тренер =====
+const DEFTPL=[{id:'t1',name:'Курсовка',ev:'100 в/с',reps:4,rest:'отдых 20 с'},{id:'t2',name:'Контрольный заплыв',ev:'200 в/с',reps:1,rest:''},{id:'t3',name:'Скоростная серия',ev:'50 в/с',reps:8,rest:'отдых 30 с'},{id:'t4',name:'Комплекс',ev:'200 к/п',reps:2,rest:'отдых 45 с'},{id:'t5',name:'Тест 400',ev:'400 в/с',reps:1,rest:''}];
+S.tpls=S.tpls||DEFTPL.map(t=>({...t}));S.days=S.days||{};
+S.coach=S.coach||{name:'Yanchanka Anton',born:'2004',nat:'BLR',asof:'',res:[]};
+const DIFF=['','Лёгкая','Умеренная','Средняя','Тяжёлая','Очень тяжёлая'];
+const MONF=['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'];
+const monthName=ym=>MONF[+ym.slice(5)-1]+' '+ym.slice(0,4);
+const shiftM=(ym,k)=>{const d=new Date(+ym.slice(0,4),+ym.slice(5)-1+k,1);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')};
+const mnav=()=>`<div class="mnav"><button data-a="mprev" aria-label="Предыдущий месяц">‹</button><b>${monthName(ui.cm)}</b><button data-a="mnext" aria-label="Следующий месяц">›</button></div>`;
+const distOf=e=>parseInt(e)||0;
+const dayRec=d=>(S.days[d]=S.days[d]||{vol:0,diff:0,note:'',sets:[]});
+const CHECK='<svg viewBox="0 0 24 24"><path d="M5 12.500l4.500 4.500L19 7.500"/></svg>';
+function goTab(t){ui.tab=t;document.querySelectorAll('nav button').forEach(x=>x.setAttribute('aria-selected',x.dataset.t===t));document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===t));drawTr();scrollTo(0,0)}
+function closeSheet(){ui.open=null;ui.fund=null;ui.plan=null;ui.hof=null;ui.day=null;ui.coach=false;ui.edit=false;renderAll()}
+
+// ---------- разрядные нормативы Беларуси (БФП / ЕСК РБ), 25 и 50 м ----------
+const RK=['II юн','I юн','III','II','I','КМС','МС'];
+const RKN={'II юн':'II юношеский','I юн':'I юношеский','III':'III разряд','II':'II разряд','I':'I разряд','КМС':'КМС','МС':'МС'};
+const N_M25=`50 в/с;23,80;24,80;29,80;32,30
+100 в/с;54,20;58,40;1.05,70;1.14,20
+200 в/с;2.00,50;2.09,50;2.26,50;2.46,50
+400 в/с;4.15,50;4.35,50;5.11,50;6.01,00
+800 в/с;9.02,50;9.33,50;10.33,50;12.35,50
+1500 в/с;17.13,50;18.17,50;20.31,50;24.20,50
+50 брасс;30,30;31,80;35,80;40,30
+100 брасс;1.07,20;1.11,20;1.19,70;1.29,20
+200 брасс;2.29,00;2.41,00;2.55,50;3.13,00
+50 батт;26,50;27,80;31,80;36,30
+100 батт;59,20;1.03,20;1.10,20;1.22,20
+200 батт;2.10,50;2.19,50;2.40,00;3.04,00
+50 спина;27,80;30,80;32,80;35,80
+100 спина;1.01,70;1.06,70;1.14,20;1.23,20
+200 спина;2.12,50;2.19,00;2.39,00;3.04,00
+100 к/п;1.01,70;1.06,20;1.12,20;1.19,20
+200 к/п;2.15,50;2.25,50;2.43,50;3.00,00
+400 к/п;4.49,50;5.08,00;5.49,50;6.36,50`;
+const N_F25=`50 в/с;27,30;28,80;31,80;35,50
+100 в/с;1.01,70;1.05,20;1.11,70;1.21,20
+200 в/с;2.13,50;2.21,50;2.39,00;2.54,50
+400 в/с;4.39,50;5.00,50;5.40,00;6.28,50
+800 в/с;9.46,50;10.26,00;11.48,50;13.36,00
+1500 в/с;19.30,00;20.28,00;23.18,00;28.14,00
+50 брасс;34,80;36,30;39,30;43,30
+100 брасс;1.18,20;1.23,20;1.31,20;1.41,20
+200 брасс;2.45,00;2.56,00;3.14,00;3.32,50
+50 батт;30,80;32,80;35,30;38,30
+100 батт;1.07,20;1.12,20;1.22,20;1.32,20
+200 батт;2.27,00;2.36,50;3.01,50;3.25,00
+50 спина;31,30;32,80;35,30;38,30
+100 спина;1.09,20;1.12,70;1.20,70;1.28,70
+200 спина;2.30,50;2.39,50;3.01,50;3.27,00
+100 к/п;1.07,70;1.11,70;1.16,80;1.24,70
+200 к/п;2.32,50;2.42,50;3.03,00;3.23,50
+400 к/п;5.24,00;5.44,00;6.34,00;7.14,00`;
+const N_M50=`50 в/с;24,80;25,80;29,80;34,30
+100 в/с;55,70;59,70;1.07,70;1.15,70
+200 в/с;2.02,50;2.12,00;2.29,50;2.48,50
+400 в/с;4.21,50;4.41,50;5.17,00;6.08,00
+800 в/с;9.13,00;9.45,00;10.45,00;12.46,00
+1500 в/с;17.32,50;18.41,00;20.52,50;24.34,00
+50 брасс;31,30;32,80;36,30;41,30
+100 брасс;1.08,70;1.12,20;1.20,20;1.30,70
+200 брасс;2.31,50;2.44,00;2.57,50;3.14,50
+50 батт;26,80;28,30;32,80;36,80
+100 батт;1.00,70;1.04,70;1.11,40;1.22,70
+200 батт;2.13,50;2.22,50;2.42,00;3.04,50
+50 спина;28,80;30,50;33,80;36,80
+100 спина;1.03,70;1.08,20;1.15,20;1.24,70
+200 спина;2.15,00;2.22,00;2.42,00;3.06,50
+200 к/п;2.18,00;2.28,00;2.46,00;3.02,50
+400 к/п;4.54,00;5.11,50;5.53,50;6.38,00`;
+const N_F50=`50 в/с;27,80;29,30;33,30;37,30
+100 в/с;1.02,70;1.06,70;1.12,70;1.22,70
+200 в/с;2.16,00;2.24,00;2.40,50;2.57,50
+400 в/с;4.43,50;5.06,00;5.47,00;6.32,50
+800 в/с;10.00,00;10.37,50;12.00,50;13.46,00
+1500 в/с;19.48,00;20.50,00;23.40,00;28.22,50
+50 брасс;35,30;37,00;40,30;44,30
+100 брасс;1.19,70;1.24,20;1.32,20;1.42,20
+200 брасс;2.48,00;2.59,00;3.15,50;3.34,50
+50 батт;31,30;33,30;35,80;38,80
+100 батт;1.08,70;1.13,20;1.23,20;1.33,20
+200 батт;2.30,00;2.40,50;3.04,50;3.27,50
+50 спина;32,30;33,50;35,80;38,30
+100 спина;1.10,20;1.14,20;1.22,20;1.30,20
+200 спина;2.33,00;2.43,00;3.05,00;3.29,00
+200 к/п;2.34,50;2.44,00;3.05,50;3.24,50
+400 к/п;5.29,50;5.50,00;6.37,50;7.20,00`;
+// МС: бассейн 50 м; бассейн 25 м
+const N_MSM=`50 в/с;23,40;22,65
+100 в/с;51,90;50,40
+200 в/с;1.54,75;1.51,75
+400 в/с;4.05,00;3.59,00
+800 в/с;8.29,00;8.17,00
+1500 в/с;16.15,00;15.38,50
+50 брасс;29,20;28,45
+100 брасс;1.04,90;1.03,40
+200 брасс;2.22,25;2.19,25
+50 батт;24,90;24,15
+100 батт;55,90;54,40
+200 батт;2.06,75;2.03,75
+50 спина;26,85;26,00
+100 спина;58,90;57,40
+200 спина;2.08,55;2.05,55
+100 к/п; ;56,90
+200 к/п;2.09,75;2.06,75
+400 к/п;4.37,00;4.31,00`;
+const N_MSF=`50 в/с;26,70;25,95
+100 в/с;57,90;56,40
+200 в/с;2.07,25;2.04,25
+400 в/с;4.29,00;4.23,00
+800 в/с;9.12,00;9.00,00
+1500 в/с;17.45,00;17.22,50
+50 брасс;33,40;32,65
+100 брасс;1.13,90;1.12,40
+200 брасс;2.38,25;2.35,25
+50 батт;28,25;27,50
+100 батт;1.03,40;1.01,90
+200 батт;2.20,75;2.17,75
+50 спина;29,20;28,85
+100 спина;1.06,40;1.04,00
+200 спина;2.21,75;2.18,75
+100 к/п; ;1.04,90
+200 к/п;2.24,75;2.21,75
+400 к/п;5.07,00;5.01,00`;
+// юношеские (только бассейн 25 м): юноши I, II; девушки I, II
+const N_YTH=`50 в/с;38,80;45,80;41,80;48,80
+100 в/с;1:26,70;1:43,50;1:33,70;1:53,50
+200 в/с;3:10,50;3:15,00;3:24,50;4:06,00
+50 брасс;51,80;55,80;57,80;1:03,80
+100 брасс;1:49,70;2:03,50;2:03,70;2:16,50
+200 брасс;3:49,50;4:25,00;4:15,50;4:52,00
+50 батт;44,80;50,80;50,80;55,80
+100 батт;1:34,70;1:49,50;1:49,70;2:01,50
+200 батт;3:34,50;3:57,00;3:51,50;4:22,00
+50 спина;44,80;50,80;49,80;58,80
+100 спина;1:34,70;1:56,50;1:45,70;2:08,50
+200 спина;3:32,50;4:11,00;3:47,50;4:36,00
+100 к/п;1:39,70;1:56,70;1:47,70;2:04,70
+200 к/п;3:35,50;4:05,00;3:50,50;4:31,00`;
+const NORMS={25:{М:{},Ж:{}},50:{М:{},Ж:{}}};
+(function(){
+  const put=(p,s,e,r,v)=>{const t=parseT(String(v||'').trim());if(t==null)return;((NORMS[p][s][e]=NORMS[p][s][e]||{})[r]=t)};
+  const rows=t=>t.trim().split('\n').map(l=>l.split(';'));
+  [[N_M25,25,'М'],[N_F25,25,'Ж'],[N_M50,50,'М'],[N_F50,50,'Ж']].forEach(([t,p,s])=>rows(t).forEach(c=>['КМС','I','II','III'].forEach((r,i)=>put(p,s,c[0],r,c[i+1]))));
+  [[N_MSM,'М'],[N_MSF,'Ж']].forEach(([t,s])=>rows(t).forEach(c=>{put(50,s,c[0],'МС',c[1]);put(25,s,c[0],'МС',c[2])}));
+  rows(N_YTH).forEach(c=>{put(25,'М',c[0],'I юн',c[1]);put(25,'М',c[0],'II юн',c[2]);put(25,'Ж',c[0],'I юн',c[3]);put(25,'Ж',c[0],'II юн',c[4])});
+})();
+function rankInfo(sex,pool,ev,t){
+  const n=NORMS[pool]&&NORMS[pool][sex]&&NORMS[pool][sex][ev];if(!n)return null;
+  let have=null,next=null,nv=null;
+  for(const r of RK){const v=n[r];if(v==null)continue;if(t<=v)have=r;else{next=r;nv=v;break}}
+  return {have,next,gap:next?t-nv:0,pct:next?Math.min(99,Math.round(nv/t*100)):100};
+}
+const gapS=g=>g.toFixed(2).replace('.',',')+' с';
+
+// ---------- результаты: бассейн, рекорды, зал славы ----------
+function allBests(pool){const m={};S.res.forEach(r=>{if(pool&&(r.pool||25)!==+pool)return;const o=m[r.sid]=m[r.sid]||{};if(!o[r.ev]||r.t<o[r.ev].t)o[r.ev]=r});return m}
+const MEDAL={1:['Золото','#E0B84C'],2:['Серебро','#B4BEC8'],3:['Бронза','#C98F63']};
+const medals=sid=>S.res.filter(r=>(!sid||r.sid===sid)&&r.pl>=1&&r.pl<=3);
+const mdot=(p,big)=>`<span class="md${big?' big':''}" style="background:${MEDAL[p][1]}">${p}</span>`;
+function medalCount(sid){const c=[0,0,0];medals(sid).forEach(r=>c[r.pl-1]++);return c}
+const rankTag=(w,pool,e,t)=>{const ri=rankInfo(w.sex,+pool,e,t);return ri&&ri.have?`<span class="tag n">${RKN[ri.have]}</span>`:''};
+function drawRc(){
+  $('rcSeg').innerHTML=ch([['rank','Рейтинг'],['stat','Статистика'],['hof','Зал славы']],ui.rv,'rv');
+  $('rcMain').style.display=ui.rv==='rank'?'':'none';$('rcStat').style.display=ui.rv==='rank'?'none':'';
+  if(ui.rv==='stat')anRes($('rcStat'));
+  if(ui.rv==='hof')drawHof($('rcStat'));
+  const AB=allBests(ui.pool),years=['Все',...[...new Set(S.sw.map(yr).filter(y=>y!=='—'))].sort()];
+  $('rPool').innerHTML=ch([['25','Бассейн 25 м'],['50','Бассейн 50 м']],ui.pool,'pool');
+  $('rSex').innerHTML=ch([['Все','Все'],['Ж','Девочки'],['М','Мальчики']],ui.rSex,'rSex');
+  $('rYear').innerHTML=ch(years.map(y=>[y,y==='Все'?'Все годы':y+' г.р.']),ui.rYear,'rYear');
+  $('sChips').innerHTML=strokeChips();$('dChips').innerHTML=distChips();
+  const pool=S.sw.filter(w=>(ui.rSex==='Все'||w.sex===ui.rSex)&&(ui.rYear==='Все'||yr(w)===ui.rYear));
+  const ord=pool.filter(w=>AB[w.id]&&AB[w.id][ui.dist]).sort((a,z)=>AB[a.id][ui.dist].t-AB[z.id][ui.dist].t);
+  if(!ord.length){$('lead').innerHTML='<span>На этой дистанции результатов пока нет</span>';$('rank').innerHTML=empty('В бассейне '+ui.pool+' м пока никто не плавал эту дистанцию.')}
+  else{$('lead').innerHTML=`<b>${T(AB[ord[0].id][ui.dist].t)}</b><span><strong>${esc(ord[0].name)}</strong>лучший результат · ${lbl(ui.dist)} · ${ui.pool} м</span>`;
+    $('rank').innerHTML=ord.map((w,i)=>`<div class="card rk" data-a="open" data-id="${w.id}" role="button" tabindex="0"><div class="pos ${i<2?'p'+(i+1):''}">${i+1}</div><div class="av2" style="background:${colOf(w)}">${esc(ini(w.name))}</div><div><b>${esc(w.name)}</b> ${rankTag(w,ui.pool,ui.dist,AB[w.id][ui.dist].t)}<br><span class="muted">${fd(AB[w.id][ui.dist].date)}</span></div><div class="t">${T(AB[w.id][ui.dist].t)}</div></div>`).join('')}
+  const cols=DIST.filter(e=>pool.some(w=>AB[w.id]&&AB[w.id][e])),best={};cols.forEach(e=>best[e]=Math.min(...pool.map(w=>AB[w.id]&&AB[w.id][e]?AB[w.id][e].t:1e9)));
+  $('tbl').innerHTML=cols.length?'<table><thead><tr><th></th>'+cols.map(e=>`<th>${e}</th>`).join('')+'</tr></thead><tbody>'+pool.map(w=>`<tr><td>${esc(short(w.name))}</td>`+cols.map(e=>{const r=AB[w.id]&&AB[w.id][e];return `<td class="${r&&r.t===best[e]?'b':''}">${r?T(r.t):'—'}</td>`}).join('')+'</tr>').join('')+'</tbody></table>':'<span class="muted">Результатов пока нет</span>';
+}
+function drawHof(el){
+  const tot=[0,0,0];S.sw.forEach(w=>medalCount(w.id).forEach((v,i)=>tot[i]+=v));
+  const R=S.sw.map(w=>({w,c:medalCount(w.id)})).filter(x=>x.c[0]+x.c[1]+x.c[2]).sort((a,b)=>b.c[0]-a.c[0]||b.c[1]-a.c[1]||b.c[2]-a.c[2]);
+  el.innerHTML=`<div class="medals">${[1,2,3].map(p=>`<button class="mt" data-a="hof" data-p="${p}">${mdot(p,1)}<b>${tot[p-1]}</b><small>${MEDAL[p][0]}</small></button>`).join('')}</div>`+
+   (R.map(x=>`<div class="card hofrow" data-a="hof" data-id="${x.w.id}" role="button" tabindex="0"><div class="av2" style="background:${colOf(x.w)}">${esc(ini(x.w.name))}</div><div><b>${esc(x.w.name)}</b><br><span class="muted">${x.c[0]+x.c[1]+x.c[2]} медалей</span></div><div class="mrow">${[0,1,2].map(i=>`<span class="mc">${mdot(i+1)}${x.c[i]}</span>`).join('')}</div></div>`).join('')||empty('Медали появятся, когда в протоколах будут призовые места 1–3.'))+
+   '<p class="note">Нажми на медаль или на спортсмена, чтобы увидеть соревнования и дистанции.</p>';
+}
+function hofView(h){
+  const sw=h.id?S.sw.find(w=>w.id===h.id):null,L=medals(h.id).filter(r=>!h.p||r.pl===h.p).sort((a,b)=>a.date<b.date?1:a.date>b.date?-1:a.ev.localeCompare(b.ev));
+  const G={};L.forEach(r=>{const k=r.date+'|'+(r.comp||'Соревнование');(G[k]=G[k]||[]).push(r)});
+  const title=sw?sw.name:MEDAL[h.p][0]+' · вся группа';
+  return `${art('wave','dsh')}<div class="ph"><div><h2>${esc(title)}</h2><span class="muted">Зал славы · ${L.length} ${h.p?MEDAL[h.p][0].toLowerCase():'медалей'}</span></div><button class="x" data-a="close" aria-label="Закрыть">×</button></div>
+  ${sw?`<div class="chips">${[0,1,2,3].map(p=>`<button aria-pressed="${(h.p||0)===p}" data-a="hofp" data-p="${p}">${p?MEDAL[p][0]:'Все'}</button>`).join('')}</div>`:''}
+  ${Object.keys(G).map(k=>{const [d,c]=k.split('|');return `<div class="card"><b>${esc(c)}</b><div class="muted">${fd(d)}</div>${G[k].map(r=>{const w=S.sw.find(x=>x.id===r.sid);return `<div class="hist"><b>${mdot(r.pl)} ${sw?'':esc(short(w?w.name:'?'))+' · '}${lbl(r.ev)}</b><b class="num">${T(r.t)}</b><span></span><small>${r.pl} место · бассейн ${r.pool||25} м</small><small></small></div>`}).join('')}</div>`}).join('')||empty('Здесь пока пусто.')}`;
+}
+
+// ---------- профиль спортсмена ----------
+function spark(pts){if(!pts.length)return'';const W=300,H=90,p=14,v=pts.map(x=>x.t);let mn=Math.min(...v),mx=Math.max(...v);if(mx===mn)mx=mn+1;
+  const xy=pts.map((x,i)=>[pts.length>1?p+i*(W-2*p)/(pts.length-1):W/2,p+(x.t-mn)/(mx-mn)*(H-2*p)]),line=xy.map((q,i)=>(i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)).join(' '),[lx,ly]=xy[xy.length-1];
+  return `<svg viewBox="0 0 ${W} ${H}">${pts.length>1?`<path d="${line} L${lx} ${H} L${xy[0][0]} ${H}Z" class="ca"/><path d="${line}" class="cl"/>`:''}${xy.slice(0,-1).map(q=>`<circle cx="${q[0]}" cy="${q[1]}" r="3.5" style="fill:var(--strong)"/>`).join('')}<circle cx="${lx}" cy="${ly}" r="7" class="cdot"/></svg>`}
+function view(w){
+  const b=allBests(ui.pool)[w.id]||{},evs=DIST.filter(e=>b[e]),c=calc(w.id),mc=medalCount(w.id),mine=S.res.filter(r=>r.sid===w.id).sort((a,z)=>a.date<z.date?-1:1);
+  const mineP=mine.filter(r=>(r.pool||25)===+ui.pool),first={};mineP.forEach(r=>{if(!first[r.ev])first[r.ev]=r});
+  const pe=evs.includes(ui.pev)?ui.pev:(evs.includes('100 в/с')?'100 в/с':evs[0]),pts=pe?mineP.filter(r=>r.ev===pe):[];
+  const ri={};evs.forEach(e=>ri[e]=rankInfo(w.sex,+ui.pool,e,b[e].t));
+  const near=evs.filter(e=>ri[e]&&ri[e].next).sort((a,z)=>ri[a].gap/b[a].t-ri[z].gap/b[z].t).slice(0,3);
+  const kv=(k,v)=>`<span>${k}</span><span>${v?esc(v):'—'}</span>`,tel=v=>v?`<a href="tel:${esc(v.replace(/[^+\d]/g,''))}">${esc(v)}</a>`:'—';
+  return `${art('wave','dsh')}<div class="ph"><div class="av2 big" style="background:${colOf(w)}">${esc(ini(w.name))}</div><div><h2>${esc(w.name)}</h2><span class="muted">${yr(w)} г.р.${age(w)!==''?' · '+age(w)+' лет':''}${w.sex?' · '+(w.sex==='Ж'?'девочка':'мальчик'):''}</span></div><button class="x" data-a="close" aria-label="Закрыть">×</button></div>
+  <div class="tags"><span class="tag">${esc(w.grp||'без группы')}</span><span class="tag n">${esc(w.rank||'без разряда')}</span></div>
+  <div class="card hofrow" data-a="hof" data-id="${w.id}" role="button" tabindex="0" style="grid-template-columns:1fr auto"><div><b>Медали</b><br><span class="muted">нажми, чтобы увидеть соревнования</span></div><div class="mrow">${[0,1,2].map(i=>`<span class="mc">${mdot(i+1)}${mc[i]}</span>`).join('')}</div></div>
+  <div class="card"><div class="bar2" style="margin:0 0 10px"><b>Данные</b><button class="btn s g" data-a="edit">Изменить</button></div><div class="kv">${kv('Адрес',w.addr)}<span>Телефон</span><span>${tel(w.phone)}</span>${kv('Родитель',w.par)}<span>Тел. родителя</span><span>${tel(w.ppar)}</span>${kv('Заметка',w.note)}</div></div>
+  <div class="chips">${ch([['25','Бассейн 25 м'],['50','Бассейн 50 м']],ui.pool,'pool')}</div>
+  ${near.length?`<div class="card acc"><b>Ближайшие разряды</b>${near.map(e=>`<div class="near"><span>${lbl(e)} · ${RKN[ri[e].next]}</span><b>−${gapS(ri[e].gap)}</b></div>`).join('')}</div>`:''}
+  <div class="card"><b>Лучшие результаты · ${ui.pool} м</b>${evs.length?evs.map(e=>{const d=b[e].t-first[e].t,r=ri[e];return `<div class="brow ${e===pe?'sel':''}" data-k="pev" data-v="${e}"><span>${lbl(e)}<br><small>${fd(b[e].date)}</small></span>${d<-0.004?`<span class="tag">−${(-d).toFixed(2).replace('.',',')} с</span>`:'<span></span>'}<b>${T(b[e].t)}</b>${r?`<div class="rp"><div class="bar"><i style="width:${r.pct}%"></i></div><small>${r.have?'Выполнен: '+RKN[r.have]:'Без разряда'}${r.next?' · до '+RKN[r.next]+': −'+gapS(r.gap):' · выше разряда нет'}</small></div>`:''}</div>`}).join(''):'<p class="muted" style="margin-top:6px">В этом бассейне результатов пока нет.</p>'}
+  ${+ui.pool===50?'<p class="muted" style="font-size:12px;margin-top:8px">Юношеские нормативы в таблице заданы только для бассейна 25 м.</p>':''}</div>
+  ${pts.length?`<div class="card"><b>Прогресс: ${lbl(pe)}</b><div class="spark" style="margin-top:8px">${spark(pts)}<small><span>${fd(pts[0].date)}</span><span>${fd(pts[pts.length-1].date)}</span></small></div></div>`:''}
+  <div class="card"><b>Посещаемость</b><div class="nums n4"><div><b>${c.m?Math.round(c.att*100)+'%':'—'}</b><small>посещ.</small></div><div><b>${c.a}</b><small>пропуск</small></div><div><b>${c.s}</b><small>болезнь</small></div><div><b>${c.avg?c.avg.toFixed(1).replace('.',','):'—'}</b><small>оценка</small></div></div></div>
+  <div class="card"><b>Последние старты</b>${mine.slice(-8).reverse().map(r=>`<div class="hist"><b>${r.pl&&r.pl<4?mdot(r.pl)+' ':''}${lbl(r.ev)}</b><b class="num">${T(r.t)}</b><button class="x2" data-a="delres" data-id="${r.id}" aria-label="Удалить результат">×</button><small>${esc(r.comp||'')}${r.comp?' · ':''}${fd(r.date)}</small><small><span class="tag n" data-a="tpool" data-id="${r.id}" role="button" tabindex="0" title="Переключить бассейн">${r.pool||25} м</span> ${r.pl?r.pl+' место':''}</small></div>`).join('')||'<p class="muted" style="margin-top:6px">Пока пусто</p>'}</div>
+  <div class="card"><b>Добавить результат</b><select class="in" id="aEv">${DIST.map(e=>`<option value="${e}" ${e===pe?'selected':''}>${lbl(e)}</option>`).join('')}</select><input class="in" id="aT" placeholder="Время, например 1:08.42" inputmode="decimal"><div class="two"><input class="in" type="date" id="aD" value="${TODAY}"><input class="in" id="aP" type="number" min="1" placeholder="Место"></div><div class="two"><select class="in" id="aPool"><option value="25" ${ui.pool==='25'?'selected':''}>Бассейн 25 м</option><option value="50" ${ui.pool==='50'?'selected':''}>Бассейн 50 м</option></select><input class="in" id="aC" placeholder="Соревнование"></div><button class="btn" data-a="addres" data-id="${w.id}">Добавить</button></div>
+  <button class="btn g" data-a="delSw" data-id="${w.id}">Удалить спортсмена</button>`;
+}
+function addRes(id){const t=parseT($('aT').value);if(t==null)return toast('Укажи время, например 1:08.42');
+  const ev=$('aEv').value;S.res.push({id:S.nid++,sid:id,ev,t,date:$('aD').value||TODAY,comp:$('aC').value.trim(),pl:+$('aP').value||0,pool:+$('aPool').value||25});ui.pev=ev;save();toast('Результат добавлен')}
+
+// ---------- протоколы: TXT / Word / PDF, поиск своих спортсменов ----------
+let PRV=[],PRVINFO={};
+const PDFJS='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js',PDFW='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+const loadScript=src=>new Promise((ok,err)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>err(new Error('для PDF нужен интернет'));document.head.appendChild(s)});
+async function pdfText(file){
+  if(!window.pdfjsLib)await loadScript(PDFJS);
+  if(!pdfjsLib.GlobalWorkerOptions.workerSrc)pdfjsLib.GlobalWorkerOptions.workerSrc=PDFW;
+  const pdf=await pdfjsLib.getDocument({data:new Uint8Array(await file.arrayBuffer())}).promise,out=[];
+  for(let p=1;p<=pdf.numPages;p++){const tc=await (await pdf.getPage(p)).getTextContent(),rows={};
+    tc.items.forEach(it=>{if(!it.str.trim())return;const y=Math.round(it.transform[5]/4);(rows[y]=rows[y]||[]).push([it.transform[4],it.str])});
+    Object.keys(rows).map(Number).sort((a,b)=>b-a).forEach(y=>out.push(rows[y].sort((a,b)=>a[0]-b[0]).map(x=>x[1]).join(' ')));out.push('')}
+  return out.join('\n');
+}
+async function docText(file){
+  if(typeof JSZip==='undefined')throw new Error('для Word нужен интернет');
+  const z=await JSZip.loadAsync(await file.arrayBuffer()),xml=await z.file('word/document.xml').async('string');
+  const d=new DOMParser().parseFromString(xml,'application/xml'),body=d.getElementsByTagName('w:body')[0],out=[];
+  const pt=p=>[...p.getElementsByTagName('w:t')].map(t=>t.textContent).join('');
+  [...body.children].forEach(n=>{if(n.tagName==='w:p')out.push(pt(n));else if(n.tagName==='w:tbl')[...n.children].filter(c=>c.tagName==='w:tr').forEach(tr=>out.push([...tr.children].filter(c=>c.tagName==='w:tc').map(tc=>[...tc.getElementsByTagName('w:p')].map(pt).join(' ')).join(' | ')))});
+  return out.join('\n');
+}
+async function loadProtocolFile(file){
+  const n=file.name.toLowerCase();let text='';
+  try{if(/\.docx$/.test(n))text=await docText(file);else if(/\.pdf$/.test(n))text=await pdfText(file);else text=await new Promise(r=>readText(file,r))}
+  catch(e){return toast('Не удалось прочитать файл: '+(e.message||'формат не поддерживается'))}
+  $('prTxt').value=text;runProto();
+}
+function evFromLine(l){
+  const x=l.toLowerCase();let m=x.match(/(?:^|\D)(50|100|200|400|800|1500)\s*(?:м|m|метр\w*)?\.?\s*[-–,]?\s*(воль\w*|кроль|свобод\w*|на спине|спин\w*|брасс\w*|баттерфл\w*|батт|дельфин\w*|комплекс\w*|free\w*|back\w*|breast\w*|fly|butterfly|medley)/),d,s;
+  if(m){d=m[1];s=m[2]}else{m=x.match(/(воль\w*|комплекс\w*|на спине|брасс\w*|баттерфл\w*|free\w*|medley|back\w*|breast\w*).{0,25}?(?:^|\D)(50|100|200|400|800|1500)\s*(?:м|m)\b/);if(!m)return null;s=m[1];d=m[2]}
+  const c=/воль|кроль|свобод|free/.test(s)?'в/с':/спин|back/.test(s)?'спина':/брасс|breast/.test(s)?'брасс':/батт|дельфин|fly|butter/.test(s)?'батт':'к/п',e=d+' '+c;
+  return DIST.includes(e)?e:null;
+}
+const cpl=(a,b)=>{let i=0;while(i<a.length&&i<b.length&&a[i]===b[i])i++;return i};
+const surMatch=(a,b)=>a===b||(a.length>=5&&b.length>=5&&cpl(a,b)>=Math.max(a.length,b.length)-2&&cpl(a,b)>=5);
+function scanProtocol(text){
+  const lines=text.split(/\r?\n/).map(l=>l.replace(/[\t|]+/g,' ').replace(/\s+/g,' ').trim()).filter(Boolean);
+  const idx=S.sw.map(w=>({w,tok:norm(w.name).split(' ')}));
+  const ctx={ev:null,sex:null,pool:null};let date=null,comp='';const rows=[],used=new Set(),TR=/\b\d{1,2}[:.]\d{2}[.,]\d{2}\b|\b\d{1,2}[.,]\d{2}\b/g;
+  lines.forEach(l=>{
+    const ln=norm(l),words=ln.split(' '),tms=(l.match(TR)||[]).map(parseT).filter(t=>t!=null&&t>=15&&t<=3600);
+    if(!date){const m=l.match(/(\d{1,2})[.\/](\d{1,2})[.\/](\d{4})/);if(m)date=parseD(m[0])}
+    if(!comp&&l.length<130&&!tms.length&&/(соревнован|первенств|чемпионат|кубок|турнир|открыт|гран-при)/i.test(l))comp=l;
+    const e=evFromLine(l);if(e)ctx.ev=e;
+    if(l.length<80&&!tms.length){if(/жен|девоч|девуш|girls|women|ladies/i.test(l))ctx.sex='Ж';else if(/муж|юнош|мальч|boys|\bmen\b/i.test(l))ctx.sex='М'}
+    if(/(бассейн|вод[аы]).{0,14}\b25\b|\b25\s*м.{0,14}(бассейн|вод)|короткая вода|short\s*course/i.test(l))ctx.pool=25;
+    else if(/бассейн.{0,14}\b50\b|\b50\s*м.{0,14}бассейн|длинная вода|long\s*course/i.test(l))ctx.pool=50;
+    if(!tms.length)return;
+    let hits=idx.filter(x=>x.tok[0]&&words.some(wd=>surMatch(x.tok[0],wd)));
+    if(!hits.length)return;
+    hits=hits.map(x=>{let sc=0;const g=x.tok[1]||'';if(g&&(words.includes(g)||words.includes(g[0])))sc+=2;if(x.w.birth&&l.includes(yr(x.w)))sc+=1;if(ctx.sex&&x.w.sex)sc+=ctx.sex===x.w.sex?1:-3;return {...x,sc}}).sort((a,b)=>b.sc-a.sc);
+    const top=hits.filter(h=>h.sc===hits[0].sc),uniq=top.length===1&&hits[0].sc>=0;
+    if(hits[0].sc<0&&hits.length===1)return;
+    const cand=(uniq?[hits[0]]:top).map(h=>h.w.id),w0=S.sw.find(x=>x.id===cand[0]);
+    const pm=l.match(/^(\d{1,3})(?=[.)]?\s)/),pl=pm&&+pm[1]<=300?+pm[1]:0;
+    const ev=ctx.ev,rng=ev?[BASE[ev]*.7,BASE[ev]*2.8]:[15,3600];let ts=tms.filter(t=>t>=rng[0]&&t<=rng[1]);if(!ts.length)ts=tms;
+    const bestOld=ev&&w0?((allBests()[w0.id]||{})[ev]||{}).t:null;
+    if(bestOld)ts.sort((a,b)=>Math.abs(a-bestOld)-Math.abs(b-bestOld));
+    ts=[...new Set(ts)].slice(0,3);cand.forEach(c=>used.add(c));
+    rows.push({c:cand,sid:cand[0],ev,t:ts[0],ts,pl,date:null,comp:null,pool:ctx.pool,on:!!(uniq&&ev&&ts[0]!=null)});
+  });
+  const dd=date||$('prDate').value||TODAY,dc=comp||$('prComp').value.trim(),pp=$('prPool').value?+$('prPool').value:null;
+  rows.forEach(r=>{r.date=dd;r.comp=dc;r.pool=pp||r.pool||+ui.pool});
+  PRV=rows;PRVINFO={lines:lines.length,found:rows.length,missing:S.sw.filter(w=>!used.has(w.id)).length};
+}
+function buildPRV(rows){
+  const dd=$('prDate').value||TODAY,dc=$('prComp').value.trim(),pp=$('prPool').value?+$('prPool').value:null;
+  PRV=rows.filter(r=>!/^(фио|фамилия|name)/i.test(r[0])).map(r=>{const ev=parseEv(r[1]||''),t=parseT(r[2]||''),c=match(r[0]||'').map(w=>w.id);
+    return {c,sid:c[0]||null,ev,t,ts:t!=null?[t]:[],pl:+(r[3]||0)||0,date:parseD(r[4]||'')||dd,comp:r[5]||dc,pool:+(r[6]||0)||pp||+ui.pool,on:!!(ev&&t!=null&&c.length===1)}}).filter(r=>r.c.length);
+  PRVINFO={lines:rows.length,found:PRV.length,missing:0};
+}
+function runProto(){
+  const text=$('prTxt').value;if(!text.trim())return toast('Сначала выбери файл или вставь текст протокола');
+  const L=text.split(/\r?\n/).filter(l=>l.trim()),csv=L.filter(l=>{const c=l.split(';');return c.length>=3&&parseEv(c[1]||'')&&parseT(c[2]||'')!=null}).length>=Math.max(1,L.length*.5);
+  if(csv)buildPRV(parseCSV(text));else scanProtocol(text);
+  drawPrv();
+}
+function parseProto(){runProto()}
+function drawPrv(){
+  const o=$('prOut');if(!PRVINFO.lines){o.innerHTML='';return}
+  const cache={},AB=p=>cache[p]||(cache[p]=allBests(p)),n=PRV.filter(r=>r.on).length;
+  o.innerHTML=`<h2>Найдено своих спортсменов: ${PRV.length}</h2><p class="muted" style="margin:-6px 4px 8px">Просмотрено строк: ${PRVINFO.lines}. Показаны только спортсмены из твоей базы${PRVINFO.missing?'; в этом протоколе не встретились ещё '+PRVINFO.missing:''}.</p>`+
+  (PRV.map((r,i)=>{const w=S.sw.find(x=>x.id===r.sid),old=w&&r.ev?(AB(r.pool)[r.sid]||{})[r.ev]:null,ri=w&&r.ev&&r.t!=null?rankInfo(w.sex,r.pool,r.ev,r.t):null,oi=old&&w?rankInfo(w.sex,r.pool,r.ev,old.t):null;
+    const tg=r.t==null?'время не распознано':!r.ev?'выбери дистанцию':!old?'первый результат':r.t<old.t?'рекорд −'+gapS(old.t-r.t):'не лучше прежнего';
+    const rk=ri&&ri.have&&(!oi||oi.have!==ri.have)?`<span class="tag">выполнен ${RKN[ri.have]}</span>`:'';
+    const pick=r.c.length>1?`<select class="in sm" data-a="prvPick" data-i="${i}"><option value="">Выбери спортсмена…</option>${r.c.map(id=>{const x=S.sw.find(q=>q.id===id);return `<option value="${id}">${esc(x.name)} (${yr(x)})</option>`}).join('')}</select>`:'';
+    return `<div class="card pr2 ${r.on?'on':''}"><button class="ck" role="checkbox" aria-checked="${!!r.on}" data-a="prvOn" data-i="${i}" aria-label="Добавить результат">${CHECK}</button><div><b>${esc(r.c.length===1&&w?w.name:'Несколько совпадений')}</b>${pick}<div class="two2"><select class="in sm" data-a="prvEv" data-i="${i}">${r.ev?'':'<option value="">Дистанция…</option>'}${DIST.map(e=>`<option value="${e}" ${e===r.ev?'selected':''}>${lbl(e)}</option>`).join('')}</select><select class="in sm" data-a="prvPool" data-i="${i}"><option value="25" ${r.pool===25?'selected':''}>25 м</option><option value="50" ${r.pool===50?'selected':''}>50 м</option></select></div><small class="muted">${r.pl?r.pl+' место · ':''}${fd(r.date)}${r.comp?' · '+esc(r.comp):''}</small><div><span class="tag ${/рекорд|первый/.test(tg)?'':'n'}">${tg}</span> ${rk}</div></div><div class="pt"><input class="in sm tm" data-a="prvT" data-i="${i}" value="${r.t!=null?T(r.t):''}" inputmode="decimal" aria-label="Время">${r.ts.length>1?`<div class="alts">${r.ts.map((t,k)=>`<button aria-pressed="${t===r.t}" data-a="prvAlt" data-i="${i}" data-v="${k}">${T(t)}</button>`).join('')}</div>`:''}</div></div>`}).join('')||empty('Ни одной фамилии из твоей базы в файле не нашлось. Проверь, что спортсмены добавлены во вкладке «Ещё → Люди».'))+
+  (PRV.length?`<button class="btn" data-a="saveProto">Добавить отмеченные (${n})</button>`:'');
+}
+function saveProto(){let n=0,dup=0,md=0;
+  PRV.forEach(r=>{if(!r.on||!r.sid||!r.ev||r.t==null)return;
+    if(S.res.some(x=>x.sid===r.sid&&x.ev===r.ev&&x.t===r.t&&x.date===r.date&&(x.pool||25)===r.pool)){dup++;return}
+    S.res.push({id:S.nid++,sid:r.sid,ev:r.ev,t:r.t,date:r.date,comp:r.comp,pl:r.pl,pool:r.pool});n++;if(r.pl>=1&&r.pl<=3)md++});
+  PRV=[];PRVINFO={};$('prTxt').value='';save();renderAll();toast('Добавлено: '+n+(md?', медалей: '+md:'')+(dup?', повторов пропущено: '+dup:''))}
+
+// ---------- занятия: отметки, итоги, журнал, дни, графики ----------
+function drawTr(){
+  $('trSeg').innerHTML=ch([['mark','Отметки'],['jr','Журнал'],['days','Дни'],['ch','Графики']],ui.tv,'tv');
+  $('trMain').style.display=ui.tv==='mark'?'':'none';$('trAtt').style.display=ui.tv==='mark'?'none':'';
+  $('saveBar').classList.toggle('off',!(ui.tab==='tr'&&ui.tv==='mark'));
+  if(ui.tv==='jr')return drawJournal($('trAtt'));
+  if(ui.tv==='days')return drawDays($('trAtt'));
+  if(ui.tv==='ch')return drawCharts($('trAtt'));
+  const ds=[...new Set([...Object.keys(S.att),TODAY])].sort().slice(-5);if(!ds.includes(ui.cur))ds.push(ui.cur);
+  $('dates').innerHTML=ch(ds.map(d=>[d,dl2(d)+(d===TODAY?' · сегодня':'')]),ui.cur,'cur');
+  $('tGrp').innerHTML=ch(['Все',...new Set(S.sw.map(w=>w.grp).filter(Boolean))].map(g=>[g,g]),ui.tg,'tg');
+  const L=trList(),marked=L.filter(w=>att(ui.cur,w.id).c).length;
+  $('sCnt').textContent=marked+'/'+L.length;$('sTitle').textContent=dl2(ui.cur)+(ui.cur===TODAY?' · сегодня':'');
+  $('saveTxt').textContent=marked===L.length&&L.length?'Все отмечены':'Отмечено '+marked+' из '+L.length;
+  $('list').innerHTML=L.map(w=>{const x=att(ui.cur,w.id);
+    const st=[['p','Был'],['a','Пропуск'],['s','Болезнь']].map(b=>`<button class="${b[0]}" aria-pressed="${x.c===b[0]}" data-a="mark" data-id="${w.id}" data-c="${b[0]}">${b[1]}</button>`).join('');
+    const rt=x.c==='p'?`<div class="rt"><span class="muted">оценка</span>${[1,2,3,4,5].map(v=>`<button class="${v<=x.r?'on':''}" data-a="rate" data-id="${w.id}" data-r="${v}" aria-label="Оценка ${v}"><svg><use href="#star"/></svg></button>`).join('')}</div><input class="in note" data-id="${w.id}" placeholder="Заметка" value="${esc(x.n)}">`:'';
+    return `<div class="card sw"><div class="h"><div class="av2" style="background:${colOf(w)}">${esc(ini(w.name))}</div><b>${esc(w.name)}</b></div><div class="st">${st}</div>${rt}</div>`}).join('')||empty('В этой группе пока нет спортсменов.');
+  $('dayLog').innerHTML=dayLogHtml();
+}
+function prevTime(sid,s,d){const ks=Object.keys(S.days).filter(k=>k<d).sort().reverse();
+  for(const k of ks){const q=(S.days[k].sets||[]).find(x=>x.name===s.name&&x.ev===s.ev&&x.times&&x.times[sid]);if(q){const t=parseT(q.times[sid]);if(t!=null)return t}}return null}
+const deltaHtml=(prev,cur)=>prev!=null&&cur!=null?`<span class="dl ${cur<prev?'up':'dn'}" data-prev="${prev}">${cur<prev?'−':'+'}${gapS(Math.abs(cur-prev))}</span>`:`<span class="dl" data-prev="${prev==null?'':prev}"></span>`;
+function setHtml(s,pres,d){
+  return `<div class="card setc"><div class="h"><input class="in sinp" data-set="${s.id}" data-f="name" value="${esc(s.name)}" aria-label="Название серии"><div class="row3"><select class="in sinp" data-set="${s.id}" data-f="ev" aria-label="Дистанция">${DIST.map(e=>`<option value="${e}" ${e===s.ev?'selected':''}>${lbl(e)}</option>`).join('')}</select><input class="in sinp" type="number" min="1" data-set="${s.id}" data-f="reps" value="${s.reps}" aria-label="Повторов"></div><input class="in sinp" data-set="${s.id}" data-f="rest" value="${esc(s.rest||'')}" placeholder="Отдых / интервал"></div>
+  <div class="muted" style="margin:10px 0 2px;font-size:13px">Кто плыл (${s.reps}×${distOf(s.ev)} = ${s.reps*distOf(s.ev)} м)</div>
+  ${pres.map(w=>{const on=s.times&&s.times[w.id]!=null,pv=prevTime(w.id,s,d);return `<div class="sw2"><button class="ck" role="checkbox" aria-checked="${on}" data-a="splay" data-set="${s.id}" data-id="${w.id}" aria-label="Плыл: ${esc(w.name)}">${CHECK}</button><span>${esc(short(w.name))}</span>${on?`<span style="display:flex;gap:6px;align-items:center">${deltaHtml(pv,parseT(s.times[w.id]))}<input class="in sm tin" data-set="${s.id}" data-id="${w.id}" value="${esc(s.times[w.id])}" placeholder="время" inputmode="decimal"></span>`:'<span></span>'}</div>`}).join('')||'<p class="muted" style="font-size:13px">Сначала отметь, кто был на тренировке.</p>'}
+  <div class="two"><button class="btn s g" data-a="stpl" data-set="${s.id}" style="margin-top:10px">В шаблоны</button><button class="btn s g" data-a="sdel" data-set="${s.id}" style="margin-top:10px">Удалить серию</button></div></div>`;
+}
+function dayLogHtml(){
+  const d=ui.cur,r=dayRec(d),pres=S.sw.filter(w=>att(d,w.id).c==='p'),vs=r.sets.reduce((a,s)=>a+s.reps*distOf(s.ev),0);
+  return `<h2>Итоги тренировки</h2><div class="card"><div class="two"><label class="muted" style="font-size:13px">Объём, м<input class="in" id="dVol" type="number" min="0" step="50" value="${r.vol||''}" placeholder="например 2400" style="margin-top:4px"></label><button class="btn s g" data-a="dvolsets" style="align-self:end">Из серий: ${vs} м</button></div>
+  <div class="muted" style="margin-top:14px;font-size:13px">Сложность дня</div><div class="diff">${[1,2,3,4,5].map(v=>`<button aria-pressed="${r.diff===v}" data-a="ddiff" data-v="${v}" aria-label="Сложность ${v}">${v}</button>`).join('')}</div><div class="muted" style="font-size:12px;margin-top:4px">${DIFF[r.diff]||'не выбрана'}</div>
+  <textarea class="in" id="dNote" rows="3" placeholder="Заметка к тренировке: что отрабатывали, на что обратить внимание">${esc(r.note)}</textarea></div>
+  <h2>Серии и время</h2>${r.sets.map(s=>setHtml(s,pres,d)).join('')||'<p class="muted" style="margin:0 4px 8px">Серий пока нет. Добавь из шаблона.</p>'}
+  <div class="card"><b>Добавить серию</b><div class="chips">${S.tpls.map(t=>`<button data-a="addset" data-id="${t.id}">${esc(t.name)}</button>`).join('')}<button data-a="addset" data-id="">+ Своя</button></div></div>
+  <button class="btn g" data-a="day" data-id="${d}">Открыть этот день в журнале</button>`;
+}
+const monthDates=ym=>Object.keys(S.att).filter(d=>d.startsWith(ym)&&Object.values(S.att[d]||{}).some(x=>x&&x.c)).sort();
+function dayStat(k){const a=S.att[k]||{};let p=0,m=0;Object.values(a).forEach(x=>{if(x&&x.c){m++;if(x.c==='p')p++}});const r=S.days[k]||{};return m?{p,m,pct:p/m*100,vol:+r.vol||0,diff:+r.diff||0}:null}
+function drawJournal(el){
+  const ds=monthDates(ui.cm),L=trList();
+  const tbl=ds.length?`<div class="card tblw jr" style="margin-top:6px"><table><thead><tr><th>Спортсмен</th>${ds.map(d=>`<th><button class="dh" data-a="day" data-id="${d}">${+d.slice(8)}<small>${DW[new Date(d+'T12:00:00').getDay()]}</small></button></th>`).join('')}<th>Был</th><th>Н</th><th>%</th></tr></thead><tbody>${L.map(w=>{let p=0,a=0,m=0;const cells=ds.map(d=>{const x=(S.att[d]||{})[w.id];if(!x||!x.c)return '<td></td>';m++;if(x.c==='p'){p++;return '<td class="jp">✓</td>'}a++;return x.c==='a'?'<td class="ja">н</td>':'<td class="js">б</td>'}).join('');return `<tr><td>${esc(short(w.name))}</td>${cells}<td><b>${p}</b></td><td>${a}</td><td>${m?Math.round(p/m*100)+'%':'—'}</td></tr>`}).join('')}</tbody><tfoot><tr><td>Были</td>${ds.map(d=>{const q=dayStat(d);return `<td>${q?q.p+'/'+q.m:''}</td>`}).join('')}<td></td><td></td><td></td></tr></tfoot></table></div><div class="legend2"><span><b class="jp">✓</b> был</span><span><b class="ja">н</b> не был</span><span><b class="js">б</b> болел</span></div>`:empty('В этом месяце отметок пока нет.');
+  el.innerHTML=mnav()+`<div class="chips" style="margin-top:0">${ch(['Все',...new Set(S.sw.map(w=>w.grp).filter(Boolean))].map(g=>[g,g]),ui.tg,'tg')}</div>`+tbl;
+}
+function drawDays(el){
+  const [Y,M]=ui.cm.split('-').map(Number),off=(new Date(Y,M-1,1).getDay()+6)%7,n=new Date(Y,M,0).getDate();
+  let cells='';for(let i=0;i<off;i++)cells+='<i></i>';
+  for(let d=1;d<=n;d++){const k=ui.cm+'-'+String(d).padStart(2,'0'),st=dayStat(k);
+    cells+=st?`<button class="cd has d${st.diff} ${k===TODAY?'today':''}" data-a="day" data-id="${k}" aria-label="${d}, были ${st.p} из ${st.m}"><b>${d}</b><small>${st.p}/${st.m}</small></button>`:`<div class="cd ${k===TODAY?'today':''}"><b>${d}</b></div>`}
+  const ds=monthDates(ui.cm),st=ds.map(dayStat),avg=st.length?st.reduce((a,x)=>a+x.pct,0)/st.length:0,vol=st.reduce((a,x)=>a+x.vol,0),dv=st.filter(x=>x.diff),ad=dv.length?dv.reduce((a,x)=>a+x.diff,0)/dv.length:0;
+  el.innerHTML=mnav()+`<div class="card" style="margin-top:6px"><div class="cal7">${['Пн','Вт','Ср','Чт','Пт','Сб','Вс'].map(x=>`<div class="w">${x}</div>`).join('')}${cells}</div><p class="muted" style="font-size:12px;margin-top:10px">Нажми на день. Чем темнее цвет, тем тяжелее была тренировка. Внизу: сколько были из отмеченных.</p></div>
+  <div class="sum" style="grid-template-columns:repeat(2,1fr)"><div class="card"><span class="muted">тренировок</span><b>${ds.length}</b></div><div class="card"><span class="muted">посещаемость</span><b>${Math.round(avg)}%</b></div><div class="card"><span class="muted">объём за месяц</span><b>${vol} м</b></div><div class="card"><span class="muted">сложность</span><b>${ad?ad.toFixed(1).replace('.',','):'—'}</b></div></div>`;
+}
+function dayView(k){
+  const a=S.att[k]||{},r=S.days[k]||{vol:0,diff:0,note:'',sets:[]},st=dayStat(k),pres=S.sw.filter(w=>a[w.id]&&a[w.id].c==='p'),abs=S.sw.filter(w=>a[w.id]&&(a[w.id].c==='a'||a[w.id].c==='s'));
+  return `${art('wave','dsh')}<div class="ph"><div><h2>${dl2(k)} ${k.slice(0,4)}</h2><span class="muted">${st?'были '+st.p+' из '+st.m:'отметок нет'}</span></div><button class="x" data-a="close" aria-label="Закрыть">×</button></div>
+  <div class="tags"><span class="tag">${r.vol?r.vol+' м':'объём не указан'}</span><span class="tag n">${DIFF[r.diff]?'сложность: '+DIFF[r.diff].toLowerCase():'сложность не указана'}</span></div>
+  ${r.note?`<div class="card"><b>Заметка</b><p class="muted" style="margin-top:4px;font-size:14px;color:var(--ink)">${esc(r.note)}</p></div>`:''}
+  <div class="card"><b>Были на тренировке (${pres.length})</b>${pres.map(w=>{const x=a[w.id];return `<div class="hist" data-a="open" data-id="${w.id}" role="button" tabindex="0" style="cursor:pointer"><b>${esc(w.name)}</b><span class="stars2">${x.r?'★'.repeat(x.r):''}</span><span></span><small>${esc(x.n||'')}</small><small></small></div>`}).join('')||'<p class="muted">Никого</p>'}</div>
+  ${abs.length?`<div class="card"><b>Не были (${abs.length})</b>${abs.map(w=>`<div class="hist"><b>${esc(w.name)}</b><span class="tag ${a[w.id].c==='a'?'':'n'}">${a[w.id].c==='a'?'н':'б'}</span><span></span><small>${a[w.id].c==='a'?'пропуск':'болел'}</small><small></small></div>`).join('')}</div>`:''}
+  ${(r.sets||[]).map(s=>{const rows=Object.keys(s.times||{}).map(id=>({w:S.sw.find(x=>x.id===id),t:parseT(s.times[id]),raw:s.times[id],pv:null})).filter(x=>x.w);rows.forEach(x=>x.pv=prevTime(x.w.id,s,k));
+    return `<div class="card"><b>${esc(s.name)}</b><div class="muted">${s.reps}×${distOf(s.ev)} м · ${lbl(s.ev)}${s.rest?' · '+esc(s.rest):''}</div>${rows.map(x=>`<div class="hist"><b>${esc(short(x.w.name))}</b><b class="num">${x.t!=null?T(x.t):esc(x.raw)||'—'}</b><span>${deltaHtml(x.pv,x.t)}</span><small></small><small></small></div>`).join('')||'<p class="muted" style="font-size:13px">Время не записано</p>'}</div>`}).join('')}
+  <button class="btn" data-a="openday" data-id="${k}">Редактировать отметки и итоги</button>`;
+}
+function svgChart(pts,type,max,fmt){
+  const W=300,H=132,pl=8,pr=8,pt=18,pb=22,n=pts.length,iw=W-pl-pr,ih=H-pt-pb,xb=i=>pl+(i+.5)*iw/n,y=v=>pt+ih-Math.min(v,max)/max*ih,bw=Math.min(26,iw/n*.6);
+  let g=`<line x1="${pl}" x2="${W-pr}" y1="${pt+ih}" y2="${pt+ih}" class="cax"/>`;
+  if(type==='bar')pts.forEach((p,i)=>{g+=`<rect class="cb" x="${(xb(i)-bw/2).toFixed(1)}" y="${y(p.v).toFixed(1)}" width="${bw.toFixed(1)}" height="${(pt+ih-y(p.v)).toFixed(1)}" rx="5"/>`;if(n<=9)g+=`<text class="cv" x="${xb(i).toFixed(1)}" y="${(y(p.v)-4).toFixed(1)}" text-anchor="middle">${fmt(p.v)}</text>`});
+  else{const xy=pts.map((p,i)=>[xb(i),y(p.v)]),ln=xy.map((q,i)=>(i?'L':'M')+q[0].toFixed(1)+' '+q[1].toFixed(1)).join(' ');
+    g+=`<path d="${ln} L${xy[n-1][0].toFixed(1)} ${pt+ih} L${xy[0][0].toFixed(1)} ${pt+ih}Z" class="ca"/><path d="${ln}" class="cl"/>`+xy.map((q,i)=>`<circle class="cdot" cx="${q[0].toFixed(1)}" cy="${q[1].toFixed(1)}" r="4.5"/>${n<=9?`<text class="cv" x="${q[0].toFixed(1)}" y="${(q[1]-9).toFixed(1)}" text-anchor="middle">${fmt(pts[i].v)}</text>`:''}`).join('')}
+  pts.forEach((p,i)=>{g+=`<text class="ct" x="${xb(i).toFixed(1)}" y="${H-6}" text-anchor="middle">${p.l}</text>`});
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="график">${g}</svg>`;
+}
+function drawCharts(el){
+  const ds=monthDates(ui.cm),st=ds.map(d=>({d,l:+d.slice(8),...dayStat(d)}));
+  if(!st.length){el.innerHTML=mnav()+empty('Графики появятся, когда в этом месяце будут тренировки.');return}
+  const att=st.map(x=>({l:x.l,v:Math.round(x.pct)})),vol=st.filter(x=>x.vol).map(x=>({l:x.l,v:x.vol})),dif=st.filter(x=>x.diff).map(x=>({l:x.l,v:x.diff}));
+  const card=(t,s,svg)=>`<div class="card chart"><b>${t}</b><div class="muted" style="font-size:12px;margin-bottom:6px">${s}</div>${svg}</div>`;
+  el.innerHTML=mnav()+card('Посещаемость','процент пришедших от отмеченных, по дням',svgChart(att,'line',100,v=>v+'%'))+
+    card('Объём','метров за тренировку',vol.length?svgChart(vol,'bar',Math.max(...vol.map(x=>x.v))*1.15,v=>v):'<p class="muted">Объём не указан. Заполни в итогах тренировки.</p>')+
+    card('Интенсивность','сложность дня от 1 до 5',dif.length?svgChart(dif,'line',5,v=>v):'<p class="muted">Сложность не указана.</p>')+
+    '<h2>Посещаемость по спортсменам</h2><div id="anAttBox"></div>';
+  anAtt($('anAttBox'));
+}
+
+// ---------- кабинет тренера ----------
+function coachView(){
+  const c=S.coach,days=Object.keys(S.att).filter(d=>dayStat(d)).length,pcts=S.sw.map(w=>calc(w.id)).filter(x=>x.m),avg=pcts.length?pcts.reduce((a,x)=>a+x.att,0)/pcts.length:0,tot=[0,0,0];
+  S.sw.forEach(w=>medalCount(w.id).forEach((v,i)=>tot[i]+=v));
+  const grps=new Set(S.sw.map(w=>w.grp).filter(Boolean)).size,starts=S.res.length,vol=Object.values(S.days).reduce((a,d)=>a+(+d.vol||0),0);
+  const best={};(c.res||[]).forEach(r=>{const k=r.pool+'|'+r.ev;if(!best[k]||r.t<best[k].t)best[k]=r});
+  const list=Object.values(best).sort((a,b)=>b.pool-a.pool||DIST.indexOf(a.ev)-DIST.indexOf(b.ev));
+  return `${art('wave','dsh')}<div class="ph"><div class="av2 big" style="background:var(--a2)">AY</div><div><h2>${esc(c.name)}</h2><span class="muted">${esc(c.born)} г.р. · ${esc(c.nat)} · тренер</span></div><button class="x" data-a="close" aria-label="Закрыть">×</button></div>
+  <div class="sum" style="grid-template-columns:repeat(2,1fr)"><div class="card"><span class="muted">спортсменов</span><b>${S.sw.length}</b></div><div class="card"><span class="muted">групп</span><b>${grps}</b></div><div class="card"><span class="muted">тренировок</span><b>${days}</b></div><div class="card"><span class="muted">посещаемость</span><b>${Math.round(avg*100)}%</b></div><div class="card"><span class="muted">стартов группы</span><b>${starts}</b></div><div class="card"><span class="muted">объём в журнале</span><b>${vol} м</b></div></div>
+  <div class="card hofrow" data-a="hof" role="button" tabindex="0" style="grid-template-columns:1fr auto"><div><b>Медали группы</b><br><span class="muted">открыть зал славы</span></div><div class="mrow">${[0,1,2].map(i=>`<span class="mc">${mdot(i+1)}${tot[i]}</span>`).join('')}</div></div>
+  <div class="card"><b>Лучшие результаты тренера</b>${list.length?list.map(r=>`<div class="hist"><b>${lbl(r.ev)} · ${r.pool} м</b><b class="num">${T(r.t)}</b><button class="x2" data-a="cdel" data-id="${r.id}" aria-label="Удалить">×</button><small>${esc(r.comp||'')}${r.comp?' · ':''}${fd(r.date)}</small><small></small></div>`).join(''):'<p class="muted" style="margin-top:6px">Пока пусто. Открой профиль на Swimrankings и внеси результаты ниже или пришли мне скриншот страницы.</p>'}</div>
+  <div class="card"><b>Добавить результат</b><select class="in" id="cEv">${DIST.map(e=>`<option value="${e}">${lbl(e)}</option>`).join('')}</select><div class="two"><input class="in" id="cT" placeholder="Время, 52.13" inputmode="decimal"><select class="in" id="cPool"><option value="25">25 м</option><option value="50">50 м</option></select></div><div class="two"><input class="in" type="date" id="cD"><input class="in" id="cC" placeholder="Соревнование"></div><button class="btn" data-a="caddres">Добавить</button></div>
+  <div class="card"><b>Источник данных</b><p class="muted" style="margin-top:4px;font-size:13px">Swimrankings.net, профиль: ${esc(c.name)}, ${esc(c.born)}, ${esc(c.nat)}. Автоматически загрузить данные не удалось: сайт не отдаёт их в открытом виде, поэтому результаты вносятся вручную.</p><label class="muted" style="display:block;margin-top:8px;font-size:13px">Данные актуальны на<input class="in" type="date" id="cAsof" value="${esc(c.asof||'')}" style="margin-top:4px"></label><a class="btn g" href="https://www.swimrankings.net/" target="_blank" rel="noopener">Открыть Swimrankings</a></div>
+  <p class="note">${c.asof?'Данные тренера: swimrankings.net, на '+fd(c.asof)+'.':'Данные тренера: swimrankings.net (дата не указана).'}</p>`;
+}
+function drawProfile(){
+  const sh=$('sheet');if(!(ui.open||ui.fund||ui.plan||ui.hof||ui.day||ui.coach)){sh.hidden=true;document.body.style.overflow='';return}
+  let html;
+  if(ui.coach)html=coachView();
+  else if(ui.hof)html=hofView(ui.hof);
+  else if(ui.day)html=dayView(ui.day);
+  else if(ui.fund){const f=curFund();if(!f){ui.fund=null;return drawProfile()}html=fundView(f)}
+  else if(ui.plan){const p=PL.find(x=>x.id===ui.plan);if(!p){ui.plan=null;return drawProfile()}html=planView(p)}
+  else{const w=ui.open==='new'?null:S.sw.find(x=>x.id===ui.open);if(!w&&ui.open!=='new'){ui.open=null;return drawProfile()}html=(ui.edit||!w)?editForm(w):view(w)}
+  const keep=$('shIn').scrollTop;sh.hidden=false;document.body.style.overflow='hidden';$('shIn').innerHTML=html;$('shIn').scrollTop=keep;
+}
+function dayInput(t){
+  if(t.id==='dVol'){dayRec(ui.cur).vol=+t.value||0;save();return true}
+  if(t.id==='dNote'){dayRec(ui.cur).note=t.value;save();return true}
+  if(t.id==='cAsof'){S.coach.asof=t.value;save();return true}
+  if(t.dataset.f&&t.dataset.set){const s=dayRec(ui.cur).sets.find(x=>x.id===t.dataset.set);if(s){const f=t.dataset.f;s[f]=f==='reps'?(+t.value||1):t.value;save()}return true}
+  if(t.classList.contains('tin')){const s=dayRec(ui.cur).sets.find(x=>x.id===t.dataset.set);if(s){s.times[t.dataset.id]=t.value;save();
+    const sp=t.closest('.sw2').querySelector('.dl'),pv=parseFloat(sp.dataset.prev),nv=parseT(t.value);
+    if(!isNaN(pv)&&nv!=null){sp.className='dl '+(nv<pv?'up':'dn');sp.textContent=(nv<pv?'−':'+')+gapS(Math.abs(nv-pv))}else{sp.className='dl';sp.textContent=''}}return true}
+  return false;
+}
+
+function drawDt(){
+  $('dtSeg').innerHTML=ch([['pr','Протокол'],['sw','Люди'],['bk','Копия'],['th','Вид']],ui.dt,'dt');
+  ['pr','sw','bk','th'].forEach(p=>$('dt-'+p).style.display=ui.dt===p?'block':'none');
+  const cur=document.documentElement.dataset.theme;
+  $('dt-th').innerHTML=`<div class="card"><b>Оформление</b><p class="muted" style="margin-top:4px">10 спокойных тем. Тема меняет весь экран сразу и запоминается. Быстро сменить можно кнопкой в правом верхнем углу.</p><div class="thg">${THEMES.map(t=>`<button aria-pressed="${t[0]===cur}" data-a="theme" data-v="${t[0]}"><i style="background:linear-gradient(135deg,${t[2][0]} 38%,${t[2][1]} 38% 68%,${t[2][2]} 68%)"></i>${t[1]}</button>`).join('')}</div></div>`;
+}
+
+// ===== действия =====
+function saveSw(){const g=i=>$(i).value.trim(),name=g('fN');if(!name)return toast('Укажи ФИО');
+  const d={name,birth:parseD(g('fB'))||'',sex:g('fS'),grp:g('fG'),rank:g('fR'),addr:g('fA'),phone:g('fP'),par:g('fPar'),ppar:g('fPp'),note:g('fNote')};
+  if(ui.open==='new'){const w={id:'s'+Date.now(),...d};S.sw.push(w);ui.open=w.id}else Object.assign(S.sw.find(w=>w.id===ui.open),d);
+  ui.edit=false;save();toast('Сохранено')}
+function delSw(id){if(!confirm('Удалить спортсмена вместе со всеми результатами и отметками?'))return;
+  S.sw=S.sw.filter(w=>w.id!==id);S.res=S.res.filter(r=>r.sid!==id);Object.values(S.att).forEach(d=>delete d[id]);S.fund.forEach(f=>f.items=f.items.filter(i=>i.sid!==id));ui.open=null;save();toast('Удалено')}
+function impSw(){const rows=parseCSV($('swTxt').value);if(!rows.length)return toast('Вставь строки или выбери файл');let add=0,upd=0;
+  rows.filter(r=>!/^(фио|фамилия)/i.test(r[0])).forEach(r=>{const name=(r[0]||'').trim();if(!name)return;
+    const d={name,birth:parseD(r[1]||'')||'',sex:/^(ж|f|дев)/i.test(r[2]||'')?'Ж':/^(м|m|мал)/i.test(r[2]||'')?'М':'',grp:r[3]||'',rank:r[4]||'',addr:r[5]||'',phone:r[6]||'',par:r[7]||'',ppar:r[8]||'',note:r[9]||''};
+    const ex=S.sw.find(w=>norm(w.name)===norm(name));
+    if(ex){Object.keys(d).forEach(k=>{if(d[k])ex[k]=d[k]});upd++}else{S.sw.push({id:'s'+Date.now()+'_'+add,...d});add++}});
+  $('swTxt').value='';save();renderAll();toast('Добавлено: '+add+', обновлено: '+upd)}
+
+function act(a,b){const id=b.dataset.id;
+  switch(a){
+    case'open':ui.open=id;ui.edit=false;ui.day=null;ui.hof=null;ui.coach=false;break;
+    case'close':ui.open=null;ui.fund=null;ui.plan=null;ui.hof=null;ui.day=null;ui.coach=false;ui.edit=false;break;
+    case'edit':ui.edit=true;break;
+    case'cancel':ui.edit=false;if(ui.open==='new')ui.open=null;break;
+    case'newSw':ui.open='new';ui.edit=true;break;
+    case'saveSw':saveSw();break;
+    case'delSw':delSw(id);break;
+    case'addres':addRes(id);break;
+    case'delres':S.res=S.res.filter(r=>r.id!==+id);save();break;
+    case'mark':{const x=att(ui.cur,id);x.c=b.dataset.c;if(x.c!=='p'){x.r=0;x.n=''}save();break}
+    case'rate':{const x=att(ui.cur,id);x.r=x.r===+b.dataset.r?0:+b.dataset.r;save();break}
+    case'allp':trList().forEach(w=>{const x=att(ui.cur,w.id);if(!x.c)x.c='p'});save();break;
+    case'saveTr':save();toast('Сохранено');break;
+    case'theme':setTheme(b.dataset.v);break;
+    case'themeNext':{const o=THEMES.map(t=>t[0]);setTheme(o[(o.indexOf(document.documentElement.dataset.theme)+1)%o.length]);break}
+    case'fundNew':{const f={id:'f'+Date.now(),title:'Новый сбор',amt:0,items:[]};S.fund.unshift(f);ui.fund=f.id;ui.ff='Все';save();break}
+    case'fundOpen':ui.fund=id;ui.ff='Все';break;
+    case'paid':{const i=curFund().items.find(x=>x.sid===id);if(i)i.paid=!i.paid;save();break}
+    case'fdel':{const f=curFund();f.items=f.items.filter(x=>x.sid!==id);save();break}
+    case'fadd':{const f=curFund(),v=$('fSel').value,a=fAmt(f);if(v&&!f.items.some(x=>x.sid===v))f.items.push({sid:v,amt:a,paid:false});save();break}
+    case'faddg':{const f=curFund(),a=fAmt(f);S.sw.filter(w=>w.grp===b.dataset.v&&!f.items.some(x=>x.sid===w.id)).forEach(w=>f.items.push({sid:w.id,amt:a,paid:false}));save();break}
+    case'fapply':{const f=curFund(),a=fAmt(f);f.items.forEach(i=>{if(!i.paid)i.amt=a});save();toast('Сумма проставлена тем, кто ещё не сдал');break}
+    case'fcopy':copyDebts();return;
+    case'fdelete':if(confirm('Удалить этот сбор?')){S.fund=S.fund.filter(f=>f.id!==ui.fund);ui.fund=null;save()}break;
+    case'planOpen':ui.plan=id;break;
+    case'planCopy':copyPlan();return;
+    case'docTpl':makeDocx(false);return;
+    case'docOut':makeDocx(true);return;
+    case'coach':ui.coach=true;break;
+    case'hof':ui.hof={id:b.dataset.id||null,p:+b.dataset.p||0};break;
+    case'hofp':ui.hof.p=+b.dataset.p||0;break;
+    case'day':ui.day=id;break;
+    case'openday':ui.cur=id;ui.tv='mark';ui.day=null;ui.hof=null;ui.coach=false;goTab('tr');break;
+    case'mprev':ui.cm=shiftM(ui.cm,-1);break;
+    case'mnext':ui.cm=shiftM(ui.cm,1);break;
+    case'ddiff':{const r=dayRec(ui.cur);r.diff=r.diff===+b.dataset.v?0:+b.dataset.v;save();break}
+    case'dvolsets':{const r=dayRec(ui.cur);r.vol=r.sets.reduce((a,x)=>a+x.reps*distOf(x.ev),0);save();break}
+    case'addset':{const t=S.tpls.find(x=>x.id===id)||{name:'Серия',ev:'100 в/с',reps:4,rest:''};dayRec(ui.cur).sets.push({id:'q'+Date.now()+Math.floor(Math.random()*99),name:t.name,ev:t.ev,reps:t.reps,rest:t.rest,times:{}});save();break}
+    case'sdel':{const r=dayRec(ui.cur);r.sets=r.sets.filter(x=>x.id!==b.dataset.set);save();break}
+    case'splay':{const q=dayRec(ui.cur).sets.find(x=>x.id===b.dataset.set);if(q){if(q.times[id]==null)q.times[id]='';else delete q.times[id];save()}break}
+    case'stpl':{const q=dayRec(ui.cur).sets.find(x=>x.id===b.dataset.set);if(q&&!S.tpls.some(t=>t.name===q.name&&t.ev===q.ev)){S.tpls.push({id:'t'+Date.now(),name:q.name,ev:q.ev,reps:q.reps,rest:q.rest});save();toast('Шаблон сохранён')}break}
+    case'prvOn':{const r=PRV[+b.dataset.i];r.on=!r.on;drawPrv();return}
+    case'prvAlt':{const r=PRV[+b.dataset.i];r.t=r.ts[+b.dataset.v];drawPrv();return}
+    case'tpool':{const r=S.res.find(x=>x.id===+id);if(r){r.pool=(r.pool||25)===25?50:25;save()}break}
+    case'caddres':{const t=parseT($('cT').value);if(t==null)return toast('Укажи время, например 52.13');S.coach.res.push({id:'c'+Date.now(),ev:$('cEv').value,t,pool:+$('cPool').value,date:$('cD').value,comp:$('cC').value.trim()});save();toast('Результат добавлен');break}
+    case'cdel':S.coach.res=S.coach.res.filter(r=>r.id!==id);save();break;
+    case'parse':parseProto();return;
+    case'saveProto':saveProto();return;
+    case'impSw':impSw();return;
+    case'tpl':dl('шаблон-спортсмены.csv',csvOut([['ФИО','Дата рождения','Пол','Группа','Разряд','Адрес','Телефон','Родитель','Телефон родителя','Заметка'],['Иванова Анна','14.05.2012','Ж','Группа 2','III юношеский','г. Минск, ул. Примерная, 1','+375 29 000-00-00','Иванова Ольга','+375 29 000-00-01','']]));return;
+    case'expJ':dl('aquaminskmir-копия-'+TODAY+'.json',JSON.stringify(S),true);return;
+    case'expSw':dl('спортсмены.csv',csvOut([['ФИО','Дата рождения','Пол','Группа','Разряд','Адрес','Телефон','Родитель','Телефон родителя','Заметка'],...S.sw.map(w=>[w.name,w.birth?w.birth.split('-').reverse().join('.'):'',w.sex,w.grp,w.rank,w.addr,w.phone,w.par,w.ppar,w.note])]));return;
+    case'expRes':dl('результаты.csv',csvOut([['ФИО','Дистанция','Время','Место','Дата','Соревнование','Бассейн'],...S.res.map(r=>{const w=S.sw.find(x=>x.id===r.sid);return [w?w.name:'',r.ev,T(r.t),r.pl||'',r.date.split('-').reverse().join('.'),r.comp,r.pool||25]})]));return;
+    case'demo':if(confirm('Заменить текущие данные демо-данными?')){S=seed();save();toast('Демо-данные возвращены')}break;
+    case'wipe':if(confirm('Удалить всех спортсменов, результаты и отметки? Сначала сделай копию.')){S={sw:[],res:[],att:{},nid:1,fund:[]};save();toast('Все данные удалены')}break;
+  }
+  renderAll();
+}
+document.addEventListener('click',e=>{
+  if(e.target===$('sheet')){closeSheet();return}
+  const b=e.target.closest('[data-k],[data-a],[data-t]');if(!b)return;
+  if(b.dataset.t){ui.tab=b.dataset.t;document.querySelectorAll('nav button').forEach(x=>x.setAttribute('aria-selected',x===b));document.querySelectorAll('section').forEach(s=>s.classList.toggle('on',s.id===ui.tab));drawTr();scrollTo(0,0);return}
+  if(b.dataset.k){const k=b.dataset.k,v=b.dataset.v;
+    if(k==='stroke'){const g=EV.find(x=>x[0]===v);ui.dist=(g[2].includes(100)?100:g[2][0])+' '+g[0]}else ui[k]=v;renderAll();return}
+  act(b.dataset.a,b);
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&(ui.open||ui.fund||ui.plan))closeSheet();if((e.key==='Enter'||e.key===' ')&&e.target.matches('.sp,.rk,.gs,.hofrow,[role=button]')){e.preventDefault();e.target.click()}});
+document.addEventListener('input',e=>{const t=e.target;
+  if(t.id==='q'){ui.q=t.value;drawSp()}
+  else if(t.classList.contains('note')&&t.dataset.id){att(ui.cur,t.dataset.id).n=t.value;save()}
+  else if(t.classList.contains('famt')){const i=curFund().items.find(x=>x.sid===t.dataset.id);if(i){i.amt=+t.value||0;save();fundSum()}}
+  else if(dayInput(t)){}});
+document.addEventListener('change',e=>{const t=e.target;
+  if(t.id==='fTitle'){const f=curFund();if(f){f.title=t.value.trim()||'Сбор';save();drawSb()}}
+  else if(t.id==='docFile'&&t.files[0]){importDocx(t.files[0]);t.value=''}
+  else if(t.dataset.a==='pick'){const r=PRV[+t.dataset.i];if(t.value){r.c=r.c.filter(w=>w.id===t.value);r.sid=t.value;r.on=!!(r.ev&&r.t!=null);drawPrv()}}
+  else if(t.dataset.a==='prvEv'){PRV[+t.dataset.i].ev=t.value||null;drawPrv()}
+  else if(t.dataset.a==='prvPool'){PRV[+t.dataset.i].pool=+t.value;drawPrv()}
+  else if(t.dataset.a==='prvT'){const r=PRV[+t.dataset.i],v=parseT(t.value);r.t=v;if(v!=null&&!r.ts.includes(v))r.ts.unshift(v);r.ts=r.ts.slice(0,3);drawPrv()}
+  else if(t.dataset.a==='prvPick'){if(t.value){const r=PRV[+t.dataset.i];r.c=[t.value];r.sid=t.value;r.on=!!(r.ev&&r.t!=null);drawPrv()}}
+  else if(t.dataset.f==='ev'&&t.dataset.set){const q=dayRec(ui.cur).sets.find(x=>x.id===t.dataset.set);if(q){q.ev=t.value;save();drawTr()}}
+  else if(t.id==='nd'&&t.value){S.att[t.value]=S.att[t.value]||{};ui.cur=t.value;save();renderAll()}
+  else if(t.id==='prFile'&&t.files[0]){loadProtocolFile(t.files[0]);t.value=''}
+  else if(t.id==='swFile'&&t.files[0])readText(t.files[0],s=>$('swTxt').value=s);
+  else if(t.id==='bkFile'&&t.files[0])readText(t.files[0],s=>{try{const j=JSON.parse(s);if(!Array.isArray(j.sw)||!Array.isArray(j.res))throw 0;S=j;S.att=S.att||{};S.fund=S.fund||[];S.nid=S.nid||Math.max(0,...S.res.map(r=>r.id))+1;save();renderAll();toast('Копия восстановлена')}catch(x){toast('Это не файл копии')}});
+});
+$('prDate').value=TODAY;
+$('tcol').content=TC[document.documentElement.dataset.theme]||TC.sand;
+renderAll();
+</script>
+</body>
+</html>
